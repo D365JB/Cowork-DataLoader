@@ -37,7 +37,7 @@
 #>
 
 param(
-    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint")]
+    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")]
     [string[]]$DataTypes = @("All"),
 
     [string]$ConfigPath = (Join-Path $PSScriptRoot "config.json"),
@@ -59,6 +59,8 @@ $modulesDir = Join-Path $scriptRoot "modules"
 . (Join-Path $modulesDir "Upload-DemoFiles.ps1")
 . (Join-Path $modulesDir "Send-DemoChats.ps1")
 . (Join-Path $modulesDir "Initialize-DemoSharePoint.ps1")
+. (Join-Path $modulesDir "Connect-DemoDataverse.ps1")
+. (Join-Path $modulesDir "Initialize-DemoD365.ps1")
 
 # Load config
 if (-not (Test-Path $ConfigPath)) {
@@ -86,7 +88,7 @@ $config = Get-Content $ConfigPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
 
 # Resolve "All"
 if ($DataTypes -contains "All") {
-    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint")
+    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")
 }
 
 # ── Banner ───────────────────────────────────────────────────────────────────
@@ -160,6 +162,20 @@ if ($DataTypes -contains "SharePoint") {
     }
 }
 
+$d365Records = $null
+if ($DataTypes -contains "D365") {
+    $d365Path = Join-Path $dataDir "d365-records.json"
+    if (Test-Path $d365Path) {
+        $d365Records = Get-Content $d365Path -Raw | ConvertFrom-Json
+        $acctCount = @($d365Records.accounts).Count
+        $contactCount = @($d365Records.contacts).Count
+        $oppCount = @($d365Records.opportunities).Count
+        Write-Host "  Loaded D365 records: $acctCount accounts, $contactCount contacts, $oppCount opportunities" -ForegroundColor DarkGray
+    } else {
+        Write-Host "  [WARN] d365-records.json not found - skipping" -ForegroundColor Yellow
+    }
+}
+
 Write-Host ""
 
 # ── WhatIf preview ───────────────────────────────────────────────────────────
@@ -211,6 +227,23 @@ if ($WhatIf) {
         Write-Host "SHAREPOINT FILES ($($spFiles.Count)):" -ForegroundColor Cyan
         foreach ($sp in $spFiles) {
             Write-Host "  $($sp.remotePath) -> ApexSalesTeam site" -ForegroundColor White
+        }
+        Write-Host ""
+    }
+
+    if ($d365Records) {
+        $acctCount = @($d365Records.accounts).Count
+        $contactCount = @($d365Records.contacts).Count
+        $oppCount = @($d365Records.opportunities).Count
+        Write-Host "D365 RECORDS ($acctCount accounts, $contactCount contacts, $oppCount opportunities):" -ForegroundColor Cyan
+        foreach ($acct in $d365Records.accounts) {
+            Write-Host "  Account: $($acct.name) - `$$([math]::Round($acct.revenue / 1000000))M revenue" -ForegroundColor White
+        }
+        foreach ($contact in $d365Records.contacts) {
+            Write-Host "  Contact: $($contact.firstName) $($contact.lastName) ($($contact.jobTitle))" -ForegroundColor White
+        }
+        foreach ($opp in $d365Records.opportunities) {
+            Write-Host "  Opportunity: $($opp.name) - `$$([math]::Round($opp.amount / 1000000, 1))M ($($opp.stage))" -ForegroundColor White
         }
         Write-Host ""
     }
@@ -285,6 +318,22 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
         }
     } else {
         Write-Host "[SKIP] Calendar/Files/Chats/SharePoint skipped - could not authenticate." -ForegroundColor Yellow
+    }
+}
+
+# ── Execute: D365 / Dataverse (AppOnly auth) ────────────────────────────────
+
+if ($d365Records) {
+    Write-Host ""
+    Write-Host "═══ D365 SALES RECORDS ═══" -ForegroundColor Cyan
+
+    $dvConnection = Connect-DemoDataverse -Config $config
+    if ($dvConnection) {
+        Initialize-DemoD365 -Config $config -Connection $dvConnection -D365Records $d365Records
+    } else {
+        Write-Host "[SKIP] D365 records skipped - could not connect to Dataverse." -ForegroundColor Yellow
+        Write-Host "  Ensure config.json has dataverse.environmentUrl set and the app registration" -ForegroundColor Yellow
+        Write-Host "  has Dynamics CRM user_impersonation permission." -ForegroundColor Yellow
     }
 }
 

@@ -1,0 +1,147 @@
+{
+  "_note": "D365 Sales records for Copilot Cowork + Copilot for Sales demos. Aligns with the Apex Manufacturing story.",
+
+  "accounts": [
+    {
+      "key": "adatum",
+      "name": "Adatum Corp",
+      "industry": "Manufacturing",
+      "revenue": 450000000,
+      "employees": 3200,
+      "website": "https://www.adatum.com",
+      "phone": "(425) 555-0180",
+      "address": {
+        "street": "2345 Industrial Pkwy",
+        "city": "Redmond",
+        "state": "WA",
+        "zip": "98052",
+        "country": "US"
+      },
+      "description": "Large manufacturing company evaluating Apex automation solutions. Existing ProLine S customer with high satisfaction. Currently in active evaluation for ProLine X platform expansion across North American plants."
+    },
+    {
+      "key": "contoso_mfg",
+      "name": "Contoso Manufacturing",
+      "industry": "Manufacturing",
+      "revenue": 280000000,
+      "employees": 1800,
+      "website": "https://www.contosomanufacturing.com",
+      "phone": "(206) 555-0145",
+      "address": {
+        "street": "789 Factory Blvd",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98101",
+        "country": "US"
+      },
+      "description": "Existing ProLine S customer. Strong candidate for ProLine X upgrade. $1.8M pipeline."
+    },
+    {
+      "key": "tailspin",
+      "name": "Tailspin Industries",
+      "industry": "Manufacturing",
+      "revenue": 150000000,
+      "employees": 950,
+      "website": "https://www.tailspinindustries.com",
+      "phone": "(503) 555-0122",
+      "address": {
+        "street": "456 Tech Drive",
+        "city": "Portland",
+        "state": "OR",
+        "zip": "97201",
+        "country": "US"
+      },
+      "description": "Greenfield opportunity for ProLine X. $1.2M pipeline."
+    }
+  ],
+
+  "contacts": [
+    {
+      "key": "lisa_chen",
+      "account": "adatum",
+      "firstName": "Lisa",
+      "lastName": "Chen",
+      "jobTitle": "VP of Procurement",
+      "email": "lisa.chen@adatum.com",
+      "phone": "(425) 555-0181",
+      "description": "Key decision maker at Adatum Corp. Values speed to value and ROI. Budget authority for manufacturing automation investments."
+    },
+    {
+      "key": "marcus_webb",
+      "account": "adatum",
+      "firstName": "Marcus",
+      "lastName": "Webb",
+      "jobTitle": "Director of Operations",
+      "email": "marcus.webb@adatum.com",
+      "phone": "(425) 555-0182",
+      "description": "Technical evaluator at Adatum Corp. Influences vendor selection on technical merit. Led the ProLine S pilot evaluation."
+    },
+    {
+      "key": "sarah_palmer",
+      "account": "contoso_mfg",
+      "firstName": "Sarah",
+      "lastName": "Palmer",
+      "jobTitle": "Plant Manager",
+      "email": "sarah.palmer@contosomanufacturing.com",
+      "phone": "(206) 555-0146",
+      "description": "Main contact at Contoso Manufacturing. Oversaw ProLine S deployment. Interested in upgrading to ProLine X."
+    },
+    {
+      "key": "raj_patel",
+      "account": "tailspin",
+      "firstName": "Raj",
+      "lastName": "Patel",
+      "jobTitle": "CTO",
+      "email": "raj.patel@tailspinindustries.com",
+      "phone": "(503) 555-0123",
+      "description": "AI-first mindset. Evaluating ProLine X for greenfield smart manufacturing initiative."
+    }
+  ],
+
+  "opportunities": [
+    {
+      "key": "adatum_prolinex",
+      "account": "adatum",
+      "name": "Adatum Corp - ProLine X Platform Deployment",
+      "amount": 2400000,
+      "stage": "Propose",
+      "probability": 65,
+      "closeDateOffset": 45,
+      "description": "Full ProLine X platform deployment across Adatum North American plants. Includes platform license ($1.2M), implementation services ($480K), annual support ($240K), and IoT sensor package ($480K). Competitive against Fabrikam and Northwind Industrial. Meeting scheduled Thursday to present proposal.",
+      "notes": [
+        {
+          "subject": "January 15 meeting notes - Adatum Corp",
+          "dayOffset": -70,
+          "body": "Met with Lisa Chen (VP Procurement) and Marcus Webb (Dir Ops) at Adatum Corp.\n\nKey takeaways:\n- Committed to a pilot if we can demonstrate 15% throughput improvement (our ProLine S data shows 18.3%)\n- Lisa is the decision maker, Marcus influences technical evaluation\n- Budget cycle: must commit by end of Q2 (June 30) or rolls to next fiscal year\n- Asked about our Azure IoT partnership - should highlight in proposal\n- Currently evaluating Fabrikam and Northwind Industrial as alternatives\n\nNext steps: Prepare formal proposal and schedule follow-up for late April."
+        },
+        {
+          "subject": "Adatum Corp $50M smart manufacturing investment",
+          "dayOffset": -5,
+          "body": "Adatum Corp announced a $50M investment in smart manufacturing across North American plants. Their CTO is pushing AI-first vendor selection. Our ProLine X AI/ML capabilities should resonate strongly. Great timing with the Thursday meeting."
+        }
+      ]
+    },
+    {
+      "key": "contoso_upgrade",
+      "account": "contoso_mfg",
+      "name": "Contoso Manufacturing - ProLine X Upgrade",
+      "amount": 1800000,
+      "stage": "Qualify",
+      "probability": 45,
+      "closeDateOffset": 90,
+      "description": "Upgrade from ProLine S to ProLine X. Contoso is an existing satisfied customer. Strong reference potential for Adatum deal.",
+      "notes": []
+    },
+    {
+      "key": "tailspin_greenfield",
+      "account": "tailspin",
+      "name": "Tailspin Industries - Smart Manufacturing Initiative",
+      "amount": 1200000,
+      "stage": "Qualify",
+      "probability": 30,
+      "closeDateOffset": 120,
+      "description": "Greenfield ProLine X deployment for Tailspin's new smart manufacturing initiative. CTO Raj Patel has AI-first mandate.",
+      "notes": []
+    }
+  ]
+}

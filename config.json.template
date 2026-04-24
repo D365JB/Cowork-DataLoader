@@ -22,5 +22,9 @@
     "product": "ProLine X",
     "weekStart": "2026-04-27",
     "_note": "weekStart is the Monday of the demo week. Calendar events are offset from this date."
+  },
+  "dataverse": {
+    "environmentUrl": "https://yourorg.crm.dynamics.com",
+    "_note": "Dataverse environment URL for D365 Sales records. Leave blank to skip D365 data loading."
   }
 }

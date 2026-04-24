@@ -30,7 +30,7 @@
 #>
 
 param(
-    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint")]
+    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")]
     [string[]]$DataTypes = @("All"),
 
     [string]$ConfigPath = (Join-Path $PSScriptRoot "config.json"),
@@ -65,7 +65,7 @@ if (-not (Test-Path $ConfigPath)) {
 $config = Get-Content $ConfigPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
 
 if ($DataTypes -contains "All") {
-    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint")
+    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")
 }
 
 Write-Host ""
@@ -115,6 +115,8 @@ if (Test-Path $filesPath) {
 
 $modulesDir = Join-Path $scriptRoot "modules"
 . (Join-Path $modulesDir "Connect-DemoGraph.ps1")
+. (Join-Path $modulesDir "Connect-DemoDataverse.ps1")
+. (Join-Path $modulesDir "Initialize-DemoD365.ps1")
 
 $jamesEmail = $config.users["james"].email
 
@@ -272,6 +274,28 @@ if ($DataTypes -contains "SharePoint") {
         Write-Host "[SHAREPOINT] $deleted items $(if ($WhatIf) {'would be '})deleted." -ForegroundColor $(if ($deleted -gt 0) { 'Green' } else { 'DarkGray' })
     } catch {
         Write-Host "  [SKIP] SharePoint site '$spSiteName' not found or not accessible" -ForegroundColor DarkGray
+    }
+    Write-Host ""
+}
+
+# ── Delete D365 Records ──────────────────────────────────────────────────────
+
+if ($DataTypes -contains "D365") {
+    Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
+    Write-Host "D365 - Deleting Dataverse records" -ForegroundColor Red
+    Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
+
+    $d365Path = Join-Path $dataDir "d365-records.json"
+    if (Test-Path $d365Path) {
+        $d365Records = Get-Content $d365Path -Raw | ConvertFrom-Json
+        $dvConnection = Connect-DemoDataverse -Config $config
+        if ($dvConnection) {
+            Reset-DemoD365 -Connection $dvConnection -D365Records $d365Records -WhatIf:$WhatIf
+        } else {
+            Write-Host "  [SKIP] Could not connect to Dataverse." -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  [SKIP] d365-records.json not found" -ForegroundColor DarkGray
     }
     Write-Host ""
 }
