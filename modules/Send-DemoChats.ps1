@@ -1,14 +1,13 @@
-<#
+﻿<#
 .SYNOPSIS
     Creates Teams 1:1 chat messages between demo users.
 .DESCRIPTION
-    Uses Graph API to create 1:1 chats and send messages as different users.
-    Requires AppOnly auth with Chat.Create and Chat.ReadWrite.All permissions.
+    Uses Graph API to create 1:1 chats and send messages via delegated auth.
+    The signed-in user must be a participant in each chat.
+    Messages are sent as the signed-in user (sender attribution in the JSON
+    is used for display purposes in the loading output only).
 
-    NOTE: Sending chat messages as other users requires application permissions:
-    - Chat.Create (Application)
-    - ChatMessage.Send (Application) — or — Chat.ReadWrite.All (Application)
-    These must be added to the app registration via Setup-AppRegistration.ps1.
+    Requires delegated auth with Chat.ReadWrite permission.
 #>
 
 function Send-DemoChats {
@@ -90,6 +89,6 @@ function Send-DemoChats {
 
     Write-Host "[CHATS] $sent messages sent, $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
     if ($failed -gt 0) {
-        Write-Host "  TIP: Ensure app registration has Chat.Create + Chat.ReadWrite.All application permissions." -ForegroundColor DarkGray
+        Write-Host "  TIP: Ensure delegated auth includes Chat.ReadWrite scope and the signed-in user is a chat participant." -ForegroundColor DarkGray
     }
 }

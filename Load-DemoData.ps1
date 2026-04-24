@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Copilot Cowork Demo Data Loader
 .DESCRIPTION
@@ -52,12 +52,13 @@ $scriptRoot = $PSScriptRoot
 $dataDir    = Join-Path $scriptRoot "data"
 
 # Load modules
-. (Join-Path $scriptRoot "modules" "Connect-DemoGraph.ps1")
-. (Join-Path $scriptRoot "modules" "Send-DemoEmails.ps1")
-. (Join-Path $scriptRoot "modules" "New-DemoCalendarEvents.ps1")
-. (Join-Path $scriptRoot "modules" "Upload-DemoFiles.ps1")
-. (Join-Path $scriptRoot "modules" "Send-DemoChats.ps1")
-. (Join-Path $scriptRoot "modules" "Initialize-DemoSharePoint.ps1")
+$modulesDir = Join-Path $scriptRoot "modules"
+. (Join-Path $modulesDir "Connect-DemoGraph.ps1")
+. (Join-Path $modulesDir "Send-DemoEmails.ps1")
+. (Join-Path $modulesDir "New-DemoCalendarEvents.ps1")
+. (Join-Path $modulesDir "Upload-DemoFiles.ps1")
+. (Join-Path $modulesDir "Send-DemoChats.ps1")
+. (Join-Path $modulesDir "Initialize-DemoSharePoint.ps1")
 
 # Load config
 if (-not (Test-Path $ConfigPath)) {
@@ -228,41 +229,35 @@ foreach ($mod in $requiredModules) {
     }
 }
 
-# ── Execute: Emails + Chats (AppOnly auth) ──────────────────────────────────
+# ── Execute: Emails (AppOnly auth) ───────────────────────────────────────────
 
-if ($emails.Count -gt 0 -or $chats.Count -gt 0) {
+if ($emails.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
-    Write-Host "EMAILS & CHATS (app-only auth)" -ForegroundColor Cyan
+    Write-Host "EMAILS (app-only auth)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
 
     $connected = Connect-DemoGraphAppOnly -Config $config
     if ($connected) {
-        if ($emails.Count -gt 0) {
-            Write-Host ""
-            Write-Host "EMAILS:" -ForegroundColor Cyan
-            Send-DemoEmails -Config $config -Emails $emails
-        }
-        if ($chats.Count -gt 0) {
-            Write-Host ""
-            Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
-            Send-DemoChats -Config $config -Chats $chats
-        }
+        Write-Host ""
+        Write-Host "EMAILS:" -ForegroundColor Cyan
+        Send-DemoEmails -Config $config -Emails $emails
     } else {
-        Write-Host "[SKIP] Emails/Chats skipped - could not authenticate." -ForegroundColor Yellow
+        Write-Host "[SKIP] Emails skipped - could not authenticate." -ForegroundColor Yellow
     }
     Write-Host ""
 }
 
 # ── Execute: Calendar + Files + SharePoint (Delegated auth) ─────────────────
 
-if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0) {
+if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $chats.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
-    Write-Host "CALENDAR, FILES & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
+    Write-Host "CALENDAR, FILES, CHATS & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
 
     $scopes = @()
     if ($events.Count -gt 0)   { $scopes += "Calendars.ReadWrite" }
     if ($files.Count -gt 0)    { $scopes += "Files.ReadWrite.All" }
+    if ($chats.Count -gt 0)    { $scopes += "Chat.ReadWrite" }
     if ($spFiles.Count -gt 0)  { $scopes += "Sites.ReadWrite.All"; $scopes += "Group.ReadWrite.All" }
     $scopes += "User.Read.All"
 
@@ -278,13 +273,18 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0) {
             Write-Host "ONEDRIVE FILES:" -ForegroundColor Cyan
             Upload-DemoFiles -Config $config -Files $files -DataDir $dataDir
         }
+        if ($chats.Count -gt 0) {
+            Write-Host ""
+            Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
+            Send-DemoChats -Config $config -Chats $chats
+        }
         if ($spFiles.Count -gt 0) {
             Write-Host ""
             Write-Host "SHAREPOINT SITE & FILES:" -ForegroundColor Cyan
             Initialize-DemoSharePoint -Config $config -SharePointFiles $spFiles -DataDir $dataDir
         }
     } else {
-        Write-Host "[SKIP] Calendar/Files/SharePoint skipped - could not authenticate." -ForegroundColor Yellow
+        Write-Host "[SKIP] Calendar/Files/Chats/SharePoint skipped - could not authenticate." -ForegroundColor Yellow
     }
 }
 

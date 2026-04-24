@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Connects to Microsoft Graph with the appropriate auth for each data type.
 .DESCRIPTION
@@ -44,14 +44,26 @@ function Connect-DemoGraphDelegated {
 
     $tenantId = $Config.tenant.tenantId
 
-    # Disable WAM to avoid hidden browser window in VS Code terminal
-    $env:MSAL_ENABLE_WAM = "0"
+    # Check if already connected with a delegated session
+    $ctx = Get-MgContext
+    if ($ctx -and $ctx.Account) {
+        Write-Host "[AUTH] Already connected as $($ctx.Account) (Delegated)" -ForegroundColor Green
+        return $true
+    }
 
+    # Use interactive browser auth — look for browser popup (Alt+Tab if needed)
     Disconnect-MgGraph -ErrorAction SilentlyContinue | Out-Null
-    Connect-MgGraph -Scopes $Scopes -TenantId "$($Config.tenant.domain)" -NoWelcome
+    Write-Host "[AUTH] Opening browser for sign-in... (Alt+Tab if you don't see it)" -ForegroundColor Yellow
+    $env:MSAL_ENABLE_WAM = "0"
+    try {
+        Connect-MgGraph -Scopes $Scopes -TenantId "$($Config.tenant.domain)" -ErrorAction Stop -NoWelcome
+    } catch {
+        Write-Host "[AUTH] Browser auth error: $($_.Exception.Message)" -ForegroundColor Yellow
+        Write-Host "[AUTH] Checking if auth succeeded anyway..." -ForegroundColor Yellow
+    }
 
     $ctx = Get-MgContext
-    if ($ctx) {
+    if ($ctx -and $ctx.Account) {
         Write-Host "[AUTH] Connected as $($ctx.Account) (Delegated)" -ForegroundColor Green
         return $true
     } else {

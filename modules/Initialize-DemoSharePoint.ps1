@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Creates a SharePoint site and uploads shared documents for the demo.
 .DESCRIPTION
@@ -107,7 +107,7 @@ function Initialize-DemoSharePoint {
             $remotePath = $spFile.remotePath
 
             if ($spFile.sourceType -eq "file") {
-                $localPath = Join-Path $DataDir "files" $spFile.localFile
+                $localPath = Join-Path (Join-Path $DataDir "files") $spFile.localFile
                 if (-not (Test-Path $localPath)) {
                     Write-Host "  [SKIP] Local file not found: $localPath" -ForegroundColor Yellow
                     $failed++

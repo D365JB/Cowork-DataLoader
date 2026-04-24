@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Resets/cleans up all demo data from the tenant.
 .DESCRIPTION
@@ -113,7 +113,8 @@ if (Test-Path $filesPath) {
 
 # ── Connect (AppOnly needed for email delete, delegated for the rest) ────────
 
-. (Join-Path $scriptRoot "modules" "Connect-DemoGraph.ps1")
+$modulesDir = Join-Path $scriptRoot "modules"
+. (Join-Path $modulesDir "Connect-DemoGraph.ps1")
 
 $jamesEmail = $config.users["james"].email
 

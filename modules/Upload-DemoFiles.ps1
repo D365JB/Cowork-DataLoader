@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Uploads demo files to a user's OneDrive via Graph API.
 .DESCRIPTION
@@ -28,7 +28,7 @@ function Upload-DemoFiles {
             if ($file.sourceType -eq "inline") {
                 $content = $file.content
             } elseif ($file.sourceType -eq "file") {
-                $localPath = Join-Path $DataDir "files" $file.localFile
+                $localPath = Join-Path (Join-Path $DataDir "files") $file.localFile
                 if (-not (Test-Path $localPath)) {
                     Write-Host "  [SKIP] Local file not found: $localPath" -ForegroundColor Yellow
                     $failed++

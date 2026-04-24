@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Sends demo emails using Graph API with application permissions (send-as any user).
 .DESCRIPTION

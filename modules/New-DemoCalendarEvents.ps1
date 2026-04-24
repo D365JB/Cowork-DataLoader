@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Creates demo calendar events using Graph API with delegated permissions.
 .DESCRIPTION
