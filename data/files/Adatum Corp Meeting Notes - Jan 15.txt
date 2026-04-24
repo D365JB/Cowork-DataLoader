@@ -1,0 +1,31 @@
+Adatum Corp - Customer Meeting Notes
+Date: January 15, 2026
+Location: Teams Video Call
+Attendees: James Bowen, Spencer Low, David So, Lisa Chen (Adatum VP Procurement), Marcus Webb (Adatum Dir. Operations)
+
+SUMMARY
+-------
+Adatum Corp is evaluating manufacturing automation platforms for a major expansion across 3 North American plants. They purchased our ProLine S series last quarter and have been satisfied with performance (18.3% throughput improvement vs their 15% target).
+
+KEY DISCUSSION POINTS
+---------------------
+1. Adatum is expanding automation across 3 plants (Detroit, Phoenix, Toronto)
+2. Budget: $2-3M range, must commit by end of Q2 (June 30) or rolls to next FY
+3. Decision maker: Lisa Chen (VP Procurement). Marcus Webb influences technical eval.
+4. Competitive landscape: Also evaluating Fabrikam and Northwind Industrial
+5. Adatum values speed to value - our 8-week deployment is a differentiator
+6. They asked about our Azure IoT partnership - strong interest in predictive maintenance
+7. Lisa mentioned their CTO is pushing AI-first vendor selection criteria
+
+ACTION ITEMS
+------------
+- Spencer: Prepare financial proposal with ProLine X pricing (pending GA date)
+- James: Set up follow-up meeting for April/May timeframe
+- David: Send reference customer contacts (Adventure Works, Contoso Manufacturing)
+- Team: Prepare ProLine X demo environment when available
+
+NEXT STEPS
+----------
+- Follow-up meeting in April to present ProLine X capabilities
+- Adatum to finalize vendor shortlist by end of March
+- Pilot commitment expected if we can demonstrate 15%+ throughput improvement

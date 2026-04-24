@@ -1,0 +1,5 @@
+# Ignore local config with tenant-specific credentials
+config.json
+
+# PowerShell module cache
+*.psm1.cache

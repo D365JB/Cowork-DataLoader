@@ -1,0 +1,101 @@
+[
+  {
+    "scenario": "Meeting Prep",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["renee"],
+    "dayOffset": 0, "time": "08:45",
+    "subject": "Adatum Corp meeting Thursday - need your support",
+    "body": "<p>James,</p><p>Quick heads up - I have confirmed the customer meeting with <b>Adatum Corp</b> for <b>Thursday at 10 AM</b>. Their VP of Procurement (Lisa Chen) and Director of Operations (Marcus Webb) will join.</p><p>Key context:</p><ul><li>Adatum is evaluating us for their <b>manufacturing automation</b> expansion - potential $2.4M deal</li><li>They are also talking to <b>Fabrikam</b> and <b>Northwind Industrial</b></li><li>Their main concerns: <b>integration timeline</b>, <b>ROI proof points</b>, and <b>reference customers</b></li><li>Last quarter they bought our ProLine S series - satisfaction has been high</li></ul><p>Can you pull together a briefing doc and deck? I will handle the financial projections. Renee - can you add competitive positioning slides?</p><p>Thanks,<br/>Spencer</p>"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "renee",
+    "to": "james",
+    "cc": ["spencer"],
+    "dayOffset": 0, "time": "10:22",
+    "subject": "RE: Adatum Corp meeting Thursday - competitive notes",
+    "body": "<p>James,</p><p>Here is what I have on the competitive landscape for Adatum:</p><ul><li><b>Fabrikam</b> - aggressive pricing, but their integration timeline is 6+ months. We can do it in 8 weeks.</li><li><b>Northwind Industrial</b> - strong on legacy systems but weak on AI/ML capabilities. Our ProLine X has a clear edge here.</li><li>Adatum procurement team values <b>speed to value</b> above all - our 8-week deployment is a major differentiator.</li></ul><p>I will have the competitive slides ready by Wednesday EOD. Let me know if you want me in the prep session too.</p><p>- Renee</p>"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 0, "time": "14:10",
+    "subject": "Adatum meeting logistics and prior notes",
+    "body": "<p>James,</p><p>I pulled the notes from our <b>last meeting with Adatum</b> (January 15). Key takeaways:</p><ul><li>They committed to a pilot if we could demonstrate 15% throughput improvement - our ProLine S data shows 18.3%</li><li>Lisa Chen (VP Procurement) is the decision maker. Marcus Webb influences technical evaluation.</li><li>Budget cycle: they need to commit by end of Q2 (June 30) or it rolls to next fiscal year</li><li>They asked about our partnership with Azure IoT - we should highlight that</li></ul><p>Teams link is set up. I will send the calendar invite with the external attendees today.</p><p>- David</p>"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["david"],
+    "dayOffset": 1, "time": "16:35",
+    "subject": "Adatum deal financials - draft",
+    "body": "<p>James,</p><p>Here are the draft numbers for the Adatum proposal:</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse;\"><tr><th>Component</th><th>Value</th></tr><tr><td>ProLine X Platform License</td><td>$1,200,000</td></tr><tr><td>Implementation Services (8 weeks)</td><td>$480,000</td></tr><tr><td>Annual Support and Maintenance</td><td>$240,000/yr</td></tr><tr><td>IoT Sensor Package (optional)</td><td>$480,000</td></tr><tr><td><b>Total (Year 1)</b></td><td><b>$2,400,000</b></td></tr></table><p>ROI projection: 15-22% throughput improvement based on ProLine S benchmarks. Payback period: 14 months.</p><p>Let me know if these numbers work for the deck.</p><p>- Spencer</p>"
+  },
+  {
+    "scenario": "Research",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 1, "time": "09:15",
+    "subject": "Need Adatum Corp research before Thursday",
+    "body": "<p>James,</p><p>Before the Thursday meeting, it would be great to have a <b>deep dive on Adatum Corp</b> - their financials, recent news, strategic direction, and anything that could help us position better.</p><p>Specifically:</p><ul><li>Latest earnings or annual report highlights</li><li>Any recent press releases or leadership changes</li><li>Their manufacturing footprint and expansion plans</li><li>Competitive deals they have done recently</li><li>Key risks or concerns we should be aware of</li></ul><p>If you can have something by Wednesday morning, I can work it into the briefing doc.</p><p>Thanks,<br/>David</p>"
+  },
+  {
+    "scenario": "Research",
+    "from": "spencer",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 2, "time": "07:52",
+    "subject": "FYI - Adatum Corp news",
+    "body": "<p>James,</p><p>Saw this morning that Adatum Corp just announced a <b>$50M investment in smart manufacturing</b> across their North American plants. This is great timing for us.</p><p>Also heard through the grapevine that their CTO is pushing for <b>AI-first vendor selection</b> going forward. Our ProLine X AI capabilities should resonate.</p><p>Worth weaving this into the research and the deck.</p><p>- Spencer</p>"
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "molly",
+    "to": "james",
+    "cc": ["renee", "spencer"],
+    "dayOffset": 0, "time": "11:30",
+    "subject": "ProLine X launch - we need to move fast",
+    "body": "<p>Team,</p><p>Product engineering has confirmed <b>ProLine X is ready for GA</b> in 6 weeks (target: June 9). This is our biggest launch this year.</p><p><b>Key product highlights:</b></p><ul><li>40% faster processing than ProLine S</li><li>Built-in AI/ML for predictive maintenance</li><li>Azure IoT Hub native integration</li><li>New modular design - customers can start small and expand</li></ul><p><b>What we need:</b></p><ul><li><b>Competitive positioning</b> against Fabrikam X200 and Northwind NX-Pro (Renee)</li><li><b>Sales enablement</b> materials and pricing (Spencer)</li><li><b>Launch plan</b> with milestones, owners, and timeline (James - can you lead this?)</li><li>Customer pitch deck for first 10 target accounts</li></ul><p>Thursday kickoff meeting will be our starting point. Let us come prepared.</p><p>- Molly</p>"
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "renee",
+    "to": "james",
+    "cc": ["molly", "spencer"],
+    "dayOffset": 1, "time": "11:08",
+    "subject": "RE: ProLine X launch - competitive landscape",
+    "body": "<p>James,</p><p>Here is the competitive snapshot for the launch plan:</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse;\"><tr><th>Feature</th><th>Apex ProLine X</th><th>Fabrikam X200</th><th>Northwind NX-Pro</th></tr><tr><td>Processing Speed</td><td><b>40% faster</b></td><td>15% faster</td><td>Baseline</td></tr><tr><td>AI/ML Built-in</td><td><b>Yes</b></td><td>Add-on</td><td>No</td></tr><tr><td>IoT Integration</td><td><b>Azure native</b></td><td>AWS only</td><td>Custom</td></tr><tr><td>Deployment Time</td><td><b>8 weeks</b></td><td>6 months</td><td>4 months</td></tr><tr><td>Modular Design</td><td><b>Yes</b></td><td>No</td><td>Partial</td></tr><tr><td>Starting Price</td><td>$800K</td><td>$950K</td><td>$700K</td></tr></table><p>Our value prop: <i>Fastest time to value with built-in intelligence - start small, scale fast.</i></p><p>I will build this into an Excel workbook and a two-page battle card.</p><p>- Renee</p>"
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["molly", "renee"],
+    "dayOffset": 1, "time": "15:20",
+    "subject": "RE: ProLine X launch - target accounts",
+    "body": "<p>James,</p><p>Here are my <b>top 10 target accounts</b> for the ProLine X launch:</p><ol><li><b>Adatum Corp</b> - $2.4M pipeline, meeting Thursday</li><li><b>Contoso Manufacturing</b> - $1.8M, existing ProLine S customer</li><li><b>Tailspin Industries</b> - $1.2M, greenfield opportunity</li><li><b>Wide World Importers</b> - $900K, competitive displacement</li><li><b>Adventure Works</b> - $850K, expansion from pilot</li><li><b>Proseware Inc</b> - $750K, new logo prospect</li><li><b>Trey Research</b> - $600K, R&D use case</li><li><b>Litware Inc</b> - $550K, mid-market entry</li><li><b>Datum Corp</b> - $500K, partner referral</li><li><b>Munson Pickles</b> - $450K, food manufacturing vertical</li></ol><p>Total addressable pipeline: <b>$10M+</b></p><p>I will bring the full pipeline breakdown to Thursday kickoff.</p><p>- Spencer</p>"
+  },
+  {
+    "scenario": "Write/Draft",
+    "from": "molly",
+    "to": "james",
+    "cc": ["david"],
+    "dayOffset": 2, "time": "10:45",
+    "subject": "Launch plan exec summary - need it for board deck",
+    "body": "<p>James,</p><p>Quick reminder - I need the <b>ProLine X launch plan executive summary</b> for the board update next week. David mentioned you started a draft - can you finish it by <b>Friday EOD</b>?</p><p>It should cover:</p><ul><li>Launch objective and timeline</li><li>Key milestones with owners</li><li>Top 10 target accounts and pipeline value</li><li>Competitive positioning summary</li><li>Risks and mitigations</li><li>Budget estimate</li></ul><p>The board is particularly interested in the <b>$10M pipeline</b> opportunity and our competitive advantages. If you can quantify the market opportunity that would be great.</p><p>I started a skeleton doc in your OneDrive - 'ProLine X Launch Plan - Exec Summary DRAFT.txt'. Feel free to build on that.</p><p>Thanks,<br/>Molly</p>"
+  },
+  {
+    "scenario": "Write/Draft",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 2, "time": "14:30",
+    "subject": "RE: Launch plan exec summary - can help review",
+    "body": "<p>James,</p><p>Saw Molly's email about the exec summary. I know you have a lot on your plate this week with the Adatum prep too.</p><p>Happy to help - if you can get the <b>milestones, risks, and budget sections</b> filled in, I can review and polish the whole thing over the weekend. The board deck is due Monday morning.</p><p>Also, for the risks section - I'd suggest flagging:</p><ul><li>Engineering delay risk (June 9 GA date is tight)</li><li>Fabrikam pricing counter-move</li><li>Reference customer availability for launch activities</li></ul><p>Let me know how I can help.</p><p>- David</p>"
+  }
+]

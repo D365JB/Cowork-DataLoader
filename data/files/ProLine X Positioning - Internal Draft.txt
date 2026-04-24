@@ -1,0 +1,49 @@
+ProLine X - Internal Positioning Draft
+Prepared by: Marketing (Renee Lo) | Last Updated: April 2026
+Status: DRAFT - Do not distribute externally
+
+PRODUCT OVERVIEW
+----------------
+ProLine X is Apex Manufacturing's next-generation manufacturing automation platform.
+GA Target: June 9, 2026
+
+KEY DIFFERENTIATORS vs COMPETITION
+-----------------------------------
+                    Apex ProLine X    Fabrikam X200    Northwind NX-Pro
+Processing Speed    40% faster        15% faster       Baseline
+AI/ML Built-in      Yes              Add-on ($150K)   No
+IoT Integration     Azure native     AWS only         Custom integration
+Deployment Time     8 weeks          6 months         4 months
+Modular Design      Yes              No               Partial
+Starting Price      $800K            $950K            $700K
+
+VALUE PROPOSITION
+-----------------
+"Fastest time to value with built-in intelligence - start small, scale fast."
+
+TARGET SEGMENTS
+---------------
+1. Enterprise manufacturing (>$1B revenue) - full platform play
+2. Mid-market manufacturing - modular entry point
+3. Existing ProLine S customers - upgrade path with data migration
+
+COMPETITIVE STRATEGY
+--------------------
+- vs Fabrikam: Lead with deployment speed (8 wks vs 6 mo) and native AI
+- vs Northwind: Lead with AI/ML capabilities and Azure IoT integration
+- Price anchoring: Our $800K starting price includes AI; Fabrikam charges $950K + $150K AI add-on = $1.1M
+
+TOP 10 TARGET ACCOUNTS (by pipeline value)
+-------------------------------------------
+1. Adatum Corp - $2.4M (meeting scheduled)
+2. Contoso Manufacturing - $1.8M (existing customer)
+3. Tailspin Industries - $1.2M (greenfield)
+4. Wide World Importers - $900K (competitive displacement)
+5. Adventure Works - $850K (expansion from pilot)
+6. Proseware Inc - $750K (new logo)
+7. Trey Research - $600K (R&D use case)
+8. Litware Inc - $550K (mid-market)
+9. Datum Corp - $500K (partner referral)
+10. Munson's Pickles - $450K (food manufacturing)
+
+Total addressable pipeline: $10M+

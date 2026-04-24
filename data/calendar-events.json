@@ -1,0 +1,30 @@
+[
+  {"scenario":"Catch Up","owner":"james","dayOffset":0,"startTime":"08:00","endTime":"08:30","subject":"Morning standup","location":"Teams","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":0,"startTime":"09:00","endTime":"10:00","subject":"Weekly ops review","location":"Conf Room A","attendees":["david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":0,"startTime":"11:00","endTime":"11:30","subject":"1:1 with Spencer Low","location":"Teams","attendees":["spencer"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":0,"startTime":"13:00","endTime":"14:00","subject":"Budget planning sync","location":"CFO Office","attendees":["david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":0,"startTime":"15:00","endTime":"15:30","subject":"Vendor call - Azure IoT","location":"Teams"},
+
+  {"scenario":"Catch Up","owner":"james","dayOffset":1,"startTime":"08:00","endTime":"08:30","subject":"Morning standup","location":"Teams","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Meeting Prep","owner":"james","dayOffset":1,"startTime":"09:00","endTime":"10:00","subject":"Adatum Corp prep session","location":"Conf Room B","attendees":["spencer","renee","david"],"body":"<p>Prep for Thursday Adatum meeting. Bring competitive analysis, deal financials, and prior meeting notes.</p>"},
+  {"scenario":"Catch Up","owner":"james","dayOffset":1,"startTime":"10:30","endTime":"11:30","subject":"Product roadmap review","location":"Teams","attendees":["molly"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":1,"startTime":"13:00","endTime":"13:30","subject":"1:1 with Renee Lo","location":"Teams","attendees":["renee"]},
+  {"scenario":"Launch Plan","owner":"james","dayOffset":1,"startTime":"14:00","endTime":"15:00","subject":"ProLine X launch kickoff planning","location":"Conf Room A","attendees":["molly","spencer","renee"],"body":"<p>Pre-planning for Thursday launch kickoff. Review timeline, owners, and deliverables.</p>"},
+  {"scenario":"Catch Up","owner":"james","dayOffset":1,"startTime":"15:30","endTime":"16:00","subject":"IT security briefing","location":"Teams"},
+
+  {"scenario":"Catch Up","owner":"james","dayOffset":2,"startTime":"08:00","endTime":"08:30","subject":"Morning standup","location":"Teams","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Meeting Prep","owner":"james","dayOffset":2,"startTime":"09:00","endTime":"09:30","subject":"Review Adatum briefing doc","location":"Office","body":"<p>Final review of the briefing document before sending to team.</p>"},
+  {"scenario":"Catch Up","owner":"james","dayOffset":2,"startTime":"10:00","endTime":"11:00","subject":"Cross-functional sync","location":"Conf Room C","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":2,"startTime":"11:00","endTime":"11:30","subject":"1:1 with David So","location":"Teams","attendees":["david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":2,"startTime":"14:00","endTime":"15:00","subject":"Quarterly forecast review","location":"Teams","attendees":["spencer"]},
+
+  {"scenario":"Meeting Prep","owner":"james","dayOffset":3,"startTime":"08:00","endTime":"08:30","subject":"Morning standup","location":"Teams","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Meeting Prep","owner":"james","dayOffset":3,"startTime":"09:00","endTime":"09:30","subject":"Final prep - Adatum Corp","location":"Conf Room B","attendees":["spencer","renee"],"body":"<p>Last check before the 10 AM customer meeting. Review deck, talking points, and roles.</p>"},
+  {"scenario":"Meeting Prep","owner":"james","dayOffset":3,"startTime":"10:00","endTime":"11:30","subject":"Customer Meeting: Adatum Corp","location":"Teams - External","attendees":["spencer","renee","david"],"body":"<p><b>Adatum Corp</b> - VP Procurement (Lisa Chen) and Director of Ops (Marcus Webb).<br/>Agenda: ProLine X demo, ROI discussion, implementation timeline, next steps.</p>"},
+  {"scenario":"Launch Plan","owner":"james","dayOffset":3,"startTime":"13:00","endTime":"14:30","subject":"ProLine X Launch Kickoff","location":"Conf Room A","attendees":["molly","spencer","renee","david"],"body":"<p>Full launch kickoff. Agenda: product overview, competitive positioning, go-to-market plan, target accounts, timeline and owners.</p>"},
+  {"scenario":"Catch Up","owner":"james","dayOffset":3,"startTime":"15:00","endTime":"15:30","subject":"Adatum debrief","location":"Teams","attendees":["spencer","renee"]},
+
+  {"scenario":"Catch Up","owner":"james","dayOffset":4,"startTime":"08:00","endTime":"08:30","subject":"Morning standup","location":"Teams","attendees":["spencer","molly","renee","david"]},
+  {"scenario":"Catch Up","owner":"james","dayOffset":4,"startTime":"09:00","endTime":"10:00","subject":"Weekly ops review","location":"Conf Room A","attendees":["david"]},
+  {"scenario":"Launch Plan","owner":"james","dayOffset":4,"startTime":"10:30","endTime":"11:30","subject":"ProLine X launch plan review","location":"Teams","attendees":["molly","spencer","renee"],"body":"<p>Review draft launch plan from kickoff. Finalize milestones and action items.</p>"}
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "scenario": "Meeting Prep",
+    "from": "spencer",
+    "to": "james",
+    "message": "Hey James - did you see my email about the Adatum meeting Thursday? Really need your help on the briefing deck. 🙏"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "james",
+    "to": "spencer",
+    "message": "Yes just saw it. I'll start pulling it together today. Do we have the latest ProLine S performance data from their deployment?"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "spencer",
+    "to": "james",
+    "message": "Yeah - 18.3% throughput improvement. Better than the 15% they asked for. That's our strongest proof point. I'll send the numbers in an email."
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "renee",
+    "to": "james",
+    "message": "James - Spencer looped me in on the Adatum prep. I'll have the competitive slides done by Wednesday. Want me at the prep session Tuesday?"
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "james",
+    "to": "renee",
+    "message": "Absolutely, please join Tuesday at 9. Your Fabrikam analysis is going to be critical - they're our main competitor on this one."
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "david",
+    "to": "james",
+    "message": "FYI I'm sending you the notes from our January meeting with Adatum. Lisa Chen is the key decision maker - we should make sure the deck speaks to her priorities (speed to value, ROI)."
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "molly",
+    "to": "james",
+    "message": "James! Big news - engineering just confirmed ProLine X is ready for GA. June 9 target. Can you lead the launch plan? I'm sending details to the team."
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "james",
+    "to": "molly",
+    "message": "That's great timing with the Adatum deal. Yes I'll own the launch plan. Let's use Thursday's kickoff to align everyone. Can you have the product highlights ready?"
+  },
+  {
+    "scenario": "Launch Plan",
+    "from": "molly",
+    "to": "james",
+    "message": "Already drafted them! 40% faster, built-in AI/ML, Azure IoT native, modular design. I'll send the full list in an email to the group."
+  },
+  {
+    "scenario": "Write/Draft",
+    "from": "david",
+    "to": "james",
+    "message": "Hey James - Molly's asking about the exec summary for the launch plan. How's it coming? Need it for the board update next week."
+  },
+  {
+    "scenario": "Write/Draft",
+    "from": "james",
+    "to": "david",
+    "message": "Started it but still need to fill in the milestones, risks, and budget sections. Going to try to finish it after the Thursday meetings."
+  },
+  {
+    "scenario": "Write/Draft",
+    "from": "david",
+    "to": "james",
+    "message": "If you can get a draft done by Friday EOD that would be perfect. I can help review and polish over the weekend. The board deck is due Monday."
+  }
+]

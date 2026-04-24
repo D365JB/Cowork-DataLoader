@@ -1,0 +1,109 @@
+ProLine X Competitive Battle Card
+Prepared by: Renee Lo, Marketing Lead
+Last Updated: April 2026 | INTERNAL USE ONLY
+
+════════════════════════════════════════════════════════
+QUICK REFERENCE - ProLine X vs Competition
+════════════════════════════════════════════════════════
+
+OUR ELEVATOR PITCH:
+"Fastest time to value with built-in intelligence - start small, scale fast."
+
+────────────────────────────────────────────────────────
+COMPETITOR 1: FABRIKAM X200
+────────────────────────────────────────────────────────
+
+Overview:
+- Fabrikam's flagship manufacturing automation platform
+- Strong brand recognition in European markets
+- Recently expanded to North America (2024)
+
+WHERE WE WIN:
+✓ Deployment Speed: 8 weeks vs 6 months (our #1 differentiator)
+✓ AI/ML Included: Built-in vs $150K add-on (their "AI Suite" is bolted on)
+✓ Azure Native: Our IoT integration is seamless; they only support AWS
+✓ Modular: Customers can start with 1 line and expand; X200 is all-or-nothing
+✓ Total Cost: $800K starting vs $950K + $150K AI = $1.1M for comparable features
+
+WHERE THEY WIN:
+✗ European presence - stronger reference base in EU manufacturing
+✗ Longer track record (platform launched 2019 vs our 2026 GA)
+✗ SAP integration slightly deeper (but we're closing the gap)
+
+LANDMINES TO SET:
+→ "How long did your Fabrikam deployment actually take vs what they promised?"
+→ "Is AI included in their base price, or is it an expensive add-on?"
+→ "Can you start with one production line, or do you have to buy the whole platform?"
+
+OBJECTION HANDLING:
+"Fabrikam has been around longer"
+→ "That's true for their legacy platform. But X200 is new (2023) - we've been 
+   building on modern architecture from day one. And our ProLine S has 3 years 
+   of production data showing 18%+ throughput gains."
+
+"Fabrikam is cheaper"
+→ "Their base price looks lower, but AI is a $150K add-on and deployment takes 
+   6 months vs our 8 weeks. Factor in delayed time-to-value and the total cost 
+   of ownership is 30% higher."
+
+────────────────────────────────────────────────────────
+COMPETITOR 2: NORTHWIND NX-PRO
+────────────────────────────────────────────────────────
+
+Overview:
+- Northwind's industrial automation suite
+- Strong in legacy/brownfield environments
+- Good mid-market presence, especially food & beverage
+
+WHERE WE WIN:
+✓ AI/ML: We have native AI; they have zero AI capabilities
+✓ IoT: Azure-native vs custom integration (expensive, fragile)
+✓ Modern Architecture: Cloud-first vs on-premise with cloud "bridge"
+✓ Predictive Maintenance: Built-in vs non-existent
+✓ Speed: 8-week deployment vs 4 months
+
+WHERE THEY WIN:
+✗ Price: $700K starting (but no AI, no IoT, manual everything)
+✗ Legacy compatibility: Better at connecting to 20+ year old PLCs
+✗ Food & Beverage vertical: Deeper industry-specific features
+
+LANDMINES TO SET:
+→ "Does NX-Pro include any AI or predictive maintenance capabilities?"
+→ "What does their IoT integration look like? Is it Azure-native?"
+→ "How do they handle predictive maintenance vs reactive?"
+
+OBJECTION HANDLING:
+"Northwind is cheaper"
+→ "At $700K vs $800K, you're saving $100K but losing AI, IoT, and predictive 
+   maintenance. Our customers see $2M+ in annual savings from AI-driven 
+   optimization alone. The ROI math is clear."
+
+"We have old equipment that Northwind supports better"
+→ "We support all major PLC protocols through our Azure IoT adapter layer. 
+   And unlike Northwind, you get predictive maintenance that prevents 
+   the costly breakdowns your old equipment is prone to."
+
+────────────────────────────────────────────────────────
+PRICING CHEAT SHEET
+────────────────────────────────────────────────────────
+
+                    ProLine X     Fabrikam X200    Northwind NX-Pro
+Base Platform       $800K         $950K            $700K
+AI/ML               Included      +$150K add-on    Not available
+IoT Package         +$480K opt    AWS only         +$200K custom
+Implementation      $480K/8wk     $600K/6mo        $350K/4mo
+Annual Support      $240K/yr      $280K/yr         $180K/yr
+─────────────────────────────────────────────────────────
+Year 1 Total*       $2,000K       $1,980K          $1,430K
+3-Year TCO*         $2,480K       $2,540K          $1,790K
+
+*Comparable feature set. Fabrikam requires AI add-on to match.
+ Northwind cannot match AI/IoT capabilities at any price.
+
+────────────────────────────────────────────────────────
+KEY PROOF POINTS
+────────────────────────────────────────────────────────
+• Contoso Manufacturing: 22% throughput improvement, 14-month payback
+• Adventure Works: Deployed in 7 weeks (ahead of 8-week target)
+• Tailspin Industries: AI caught 3 critical equipment failures before they happened
+• 96% customer satisfaction score across ProLine S install base

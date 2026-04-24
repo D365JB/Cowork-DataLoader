@@ -1,0 +1,32 @@
+[
+  {
+    "owner": "james",
+    "remotePath": "Documents/Adatum Corp Meeting Notes - Jan 15.txt",
+    "sourceType": "file",
+    "localFile": "Adatum Corp Meeting Notes - Jan 15.txt"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Positioning - Internal Draft.txt",
+    "sourceType": "file",
+    "localFile": "ProLine X Positioning - Internal Draft.txt"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/Adatum Corp Briefing Deck - Draft.txt",
+    "sourceType": "file",
+    "localFile": "Adatum Corp Briefing Deck - Draft.txt"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Battle Card - Internal.txt",
+    "sourceType": "file",
+    "localFile": "ProLine X Battle Card - Internal.txt"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Launch Plan - Exec Summary DRAFT.txt",
+    "sourceType": "file",
+    "localFile": "ProLine X Launch Plan - Exec Summary DRAFT.txt"
+  }
+]

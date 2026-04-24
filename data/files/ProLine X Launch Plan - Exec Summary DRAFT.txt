@@ -1,0 +1,107 @@
+ProLine X Launch Plan - EXECUTIVE SUMMARY
+Author: James Bowen, VP of Operations
+Status: INCOMPLETE DRAFT - Needs finishing
+Last Saved: Tuesday April 28, 2026
+
+════════════════════════════════════════════════════════
+
+OVERVIEW
+--------
+ProLine X is Apex Manufacturing's most significant product launch in 2026.
+Product engineering has confirmed GA readiness for June 9, 2026. This document
+outlines the cross-functional launch plan including go-to-market strategy,
+target accounts, competitive positioning, and key milestones.
+
+LAUNCH OBJECTIVE
+-----------------
+Successfully bring ProLine X to market by June 9 with:
+- Sales team fully enabled with materials and training
+- First 10 target accounts engaged with custom pitch decks
+- Competitive positioning locked and battle cards distributed
+- Customer reference program activated
+- Press and analyst briefings scheduled
+
+KEY STAKEHOLDERS
+-----------------
+- Molly Clark, Product Manager - Product readiness, features, demo environment
+- Spencer Low, VP of Sales - Sales enablement, pricing, target accounts
+- Renee Lo, Marketing Lead - Competitive positioning, battle cards, launch comms
+- David So, Chief of Staff - Program management, logistics, exec reporting
+- James Bowen, VP of Operations - Overall launch leadership, exec summary, board update
+
+PRODUCT HIGHLIGHTS
+-------------------
+- 40% faster processing than ProLine S
+- Built-in AI/ML for predictive maintenance
+- Azure IoT Hub native integration
+- New modular design - customers can start small and expand
+- Starting price: $800K (AI included, unlike competitors)
+
+TARGET ACCOUNTS (Top 10 by Pipeline Value)
+-------------------------------------------
+1. Adatum Corp - $2.4M (active engagement, meeting this week)
+2. Contoso Manufacturing - $1.8M (existing ProLine S customer, natural upgrade)
+3. Tailspin Industries - $1.2M (greenfield, strong AI interest)
+4. Wide World Importers - $900K (competitive displacement opportunity)
+5. Adventure Works - $850K (expanding from successful pilot)
+6. Proseware Inc - $750K (new logo, referred by partner)
+7. Trey Research - $600K (R&D / innovation use case)
+8. Litware Inc - $550K (mid-market entry point)
+9. Datum Corp - $500K (partner referral)
+10. Munson's Pickles - $450K (food manufacturing vertical play)
+
+Total addressable pipeline: $10M+
+
+COMPETITIVE LANDSCAPE
+----------------------
+[See Renee's battle card for detailed analysis]
+
+Summary positioning:
+- vs Fabrikam X200: Faster deployment (8wk vs 6mo), AI included (vs $150K add-on)
+- vs Northwind NX-Pro: AI/ML and Azure IoT capabilities they cannot match
+
+MILESTONES AND TIMELINE
+-------------------------
+
+[TODO: James needs to fill in the detailed milestone timeline with owners and dates]
+
+Key dates to work from:
+- GA target: June 9, 2026
+- Adatum budget deadline: June 30
+- Need sales materials ready by: ???
+- Battle cards due from Renee: ???
+- Sales training sessions: ???
+- Press briefing: ???
+- Analyst briefing: ???
+
+RISKS AND MITIGATIONS
+-----------------------
+
+[TODO: Need to identify top 3-5 risks and mitigation strategies]
+
+Potential risks discussed at kickoff:
+1. Engineering delay pushes GA past June 9
+2. Fabrikam launches aggressive pricing counter
+3. Key reference customers unavailable for launch activities
+4.
+5.
+
+BUDGET
+-------
+
+[TODO: Launch budget needs to be finalized]
+
+Estimated costs:
+- Sales enablement materials: $___
+- Launch event: $___
+- Analyst/press program: $___
+- Demo environment hosting: $___
+- Travel for first 10 account visits: $___
+
+NEXT STEPS
+-----------
+- James: Complete this executive summary with milestones, risks, and budget
+- Molly: Confirm GA date and demo environment readiness
+- Spencer: Finalize pricing and prepare account-specific pitch decks
+- Renee: Deliver battle cards and competitive slides by Wednesday
+- David: Set up weekly launch standup cadence
