@@ -54,7 +54,7 @@ function Send-DemoChats {
 
             $chatResult = Invoke-MgGraphRequest -Method POST `
                 -Uri "https://graph.microsoft.com/v1.0/chats" -Body $chatBody
-            $chatId = $chatResult.id
+            $chatId = $chatResult["id"]
 
             $fromName1 = $users[$participants[0]].displayName
             $fromName2 = $users[$participants[1]].displayName
@@ -75,7 +75,7 @@ function Send-DemoChats {
                 Invoke-MgGraphRequest -Method POST `
                     -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages" `
                     -Body $msgBody `
-                    -Headers @{ "Content-Type" = "application/json" }
+                    -Headers @{ "Content-Type" = "application/json" } | Out-Null
 
                 Write-Host "    [OK] $($users[$msg.from].displayName): $($msg.message -replace '<[^>]+>','' | Select-Object -First 1)" -ForegroundColor Green
                 $sent++

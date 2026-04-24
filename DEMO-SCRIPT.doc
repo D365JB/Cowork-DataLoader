@@ -1,0 +1,237 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<style>
+body { font-family: Calibri, sans-serif; font-size: 11pt; margin: 1in; color: #1a1a1a; }
+h1 { font-size: 22pt; color: #0078D4; border-bottom: 2px solid #0078D4; padding-bottom: 6pt; }
+h2 { font-size: 16pt; color: #0078D4; margin-top: 24pt; }
+h3 { font-size: 13pt; color: #333; margin-top: 18pt; }
+blockquote { background: #f0f6ff; border-left: 4px solid #0078D4; padding: 10pt 14pt; margin: 12pt 0; font-style: italic; }
+code, pre { font-family: Consolas, monospace; font-size: 10.5pt; }
+pre { background: #f5f5f5; border: 1px solid #ddd; padding: 10pt 14pt; margin: 10pt 0; white-space: pre-wrap; }
+table { border-collapse: collapse; width: 100%; margin: 12pt 0; }
+th { background: #0078D4; color: white; padding: 8pt 12pt; text-align: left; font-weight: bold; }
+td { border: 1px solid #ddd; padding: 8pt 12pt; }
+tr:nth-child(even) { background: #f9f9f9; }
+.label { display: inline-block; background: #e8f0fe; color: #0078D4; padding: 2pt 8pt; border-radius: 3pt; font-weight: bold; font-size: 9pt; margin-bottom: 4pt; }
+.talking-point { background: #fff8e1; border-left: 4px solid #f9a825; padding: 8pt 14pt; margin: 8pt 0; font-style: italic; }
+.checklist { list-style: none; padding-left: 0; }
+.checklist li { padding: 4pt 0; }
+.checklist li:before { content: "☐ "; font-size: 12pt; }
+hr { border: none; border-top: 1px solid #ccc; margin: 20pt 0; }
+</style>
+<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
+</head>
+<body>
+
+<h1>Copilot Cowork Demo Script</h1>
+
+<table>
+<tr><td><b>Demo week</b></td><td>April 27 &#8211; May 1, 2026</td></tr>
+<tr><td><b>Persona</b></td><td>James Bowen, VP of Operations, Apex Manufacturing</td></tr>
+<tr><td><b>Interface</b></td><td>Microsoft 365 Copilot Chat (Cowork) &#8212; single UI, all prompts</td></tr>
+<tr><td><b>Setup</b></td><td>Run <code>.\Load-DemoData.ps1</code> before the demo</td></tr>
+</table>
+
+<hr>
+
+<h2>Scene-Setting (30 seconds)</h2>
+
+<blockquote>
+&#8220;It&#8217;s Monday morning. I&#8217;m VP of Operations at Apex Manufacturing. I&#8217;ve been out of office and I&#8217;m catching up on a busy week ahead &#8212; we&#8217;ve got a major customer meeting with Adatum Corp on Thursday and a product launch to plan for ProLine X. Let me show you how I use Copilot to get up to speed, prep, and get work done &#8212; all from one place.&#8221;
+</blockquote>
+
+<hr>
+
+<h2>Prompt 1: Catch Me Up</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Catch me up on what's been happening this week. What are the key things 
+I need to know from my emails, chats, and files?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li>Spencer&#8217;s Adatum meeting request + deal financials ($2.4M)</li>
+<li>Renee&#8217;s competitive analysis (Fabrikam vs. Northwind vs. us)</li>
+<li>David&#8217;s prior meeting notes from January 15</li>
+<li>Molly&#8217;s ProLine X launch announcement (GA June 9)</li>
+<li>Teams chat threads about the briefing deck and launch plan</li>
+<li>OneDrive files (briefing deck draft, battle card, exec summary)</li>
+</ul>
+
+<div class="talking-point">
+&#8220;One prompt, and Copilot searched across my emails, chats, calendar, and files. I instantly know I have a $2.4M deal meeting Thursday and a product launch to plan &#8212; no app switching.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 2: Deep Dive on the Deal</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Tell me everything I know about the Adatum Corp deal. Include the opportunity 
+details, key contacts, deal financials, competitive landscape, and any recent 
+news. Pull from my emails, files, and CRM.</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+
+<table>
+<tr><th>Data Point</th><th>Detail</th><th>Source</th></tr>
+<tr><td>Opportunity</td><td>ProLine X Platform Deployment &#8212; $2.4M, Propose stage, 65% probability</td><td>Dynamics 365</td></tr>
+<tr><td>Key Contact</td><td>Lisa Chen, VP of Procurement (decision maker)</td><td>CRM + David&#8217;s email</td></tr>
+<tr><td>Key Contact</td><td>Marcus Webb, Director of Operations (tech evaluator)</td><td>CRM + David&#8217;s email</td></tr>
+<tr><td>Deal Financials</td><td>$1.2M license + $480K implementation + $240K support + $480K IoT</td><td>Spencer&#8217;s email</td></tr>
+<tr><td>Our Edge</td><td>8-week deployment (vs. Fabrikam&#8217;s 6 months), built-in AI/ML</td><td>Renee&#8217;s email</td></tr>
+<tr><td>Proof Point</td><td>ProLine S delivered 18.3% throughput improvement (they asked for 15%)</td><td>Spencer&#8217;s chat + CRM notes</td></tr>
+<tr><td>Market News</td><td>Adatum announced $50M smart manufacturing investment</td><td>Spencer&#8217;s email</td></tr>
+<tr><td>Deadline</td><td>Must commit by end of Q2 (June 30) or budget rolls</td><td>David&#8217;s email + CRM notes</td></tr>
+</table>
+
+<div class="talking-point">
+&#8220;Copilot connected my emails, my colleague&#8217;s chats, AND the CRM record in Dynamics 365. I have the full deal picture &#8212; financials, contacts, competitive intel, and market context &#8212; without opening a single app.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 3: Meeting Prep</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Help me prepare for my meeting with Adatum Corp on Thursday at 10 AM. 
+Create a prep brief with: who's attending, what they care about, our key 
+differentiators, risks to address, and recommended talking points.</pre>
+
+<p><b>What Copilot surfaces:</b> A structured prep brief pulling from:</p>
+<ul>
+<li><b>Calendar:</b> Attendees &#8212; Spencer Low, Renee Lo, David So (internal); Lisa Chen, Marcus Webb (external)</li>
+<li><b>Emails:</b> Customer priorities = speed to value + ROI; budget deadline June 30</li>
+<li><b>CRM:</b> Opportunity stage, probability, prior meeting notes</li>
+<li><b>Competitive intel:</b> Our 8-week deployment vs. Fabrikam&#8217;s 6 months; our AI/ML vs. Northwind&#8217;s legacy</li>
+<li><b>Recommended talking points:</b> ProLine S success (18.3%), Azure IoT partnership, modular start-small approach</li>
+</ul>
+
+<div class="talking-point">
+&#8220;This prep brief would normally take me an hour to assemble &#8212; pulling from old meeting notes, emails from three colleagues, and the CRM. Copilot did it in seconds.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 4: Research the Customer</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>What do I know about Adatum Corp's recent strategic direction? Are there any 
+news items, announcements, or intelligence from my team that I should be aware 
+of before Thursday?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li>$50M smart manufacturing investment across North American plants</li>
+<li>CTO pushing AI-first vendor selection</li>
+<li>Q2 budget deadline (June 30) &#8212; commit now or wait another fiscal year</li>
+<li>January 15 meeting notes showing high satisfaction with ProLine S</li>
+<li>Company profile: $450M revenue, 3,200 employees, Redmond WA</li>
+</ul>
+
+<div class="talking-point">
+&#8220;I asked David to do customer research &#8212; turns out the intel was already scattered across my emails and CRM notes. Copilot found it all.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 5: Product Launch Status</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>What's the status of the ProLine X launch? Summarize what my team has shared 
+about the timeline, product highlights, target accounts, and competitive 
+positioning.</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+
+<table>
+<tr><th>Category</th><th>Details</th></tr>
+<tr><td>GA Date</td><td>June 9, 2026 (from Molly Clark)</td></tr>
+<tr><td>Product Highlights</td><td>40% faster processing, built-in AI/ML, Azure IoT native integration, modular design</td></tr>
+<tr><td>Pipeline</td><td>$10M+ across 10 target accounts (from Spencer Low)</td></tr>
+<tr><td>Top Accounts</td><td>Adatum Corp ($2.4M), Contoso Manufacturing ($1.8M), Tailspin Industries ($1.2M), Wide World Importers ($900K), Adventure Works ($850K), &#8230;</td></tr>
+</table>
+
+<p><b>Competitive comparison (from Renee Lo):</b></p>
+<table>
+<tr><th>Feature</th><th>Apex ProLine X</th><th>Fabrikam X200</th><th>Northwind NX-Pro</th></tr>
+<tr><td>Processing Speed</td><td><b>40% faster</b></td><td>15% faster</td><td>Baseline</td></tr>
+<tr><td>AI/ML Built-in</td><td><b>Yes</b></td><td>Add-on</td><td>No</td></tr>
+<tr><td>IoT Integration</td><td><b>Azure native</b></td><td>AWS only</td><td>Custom</td></tr>
+<tr><td>Deployment Time</td><td><b>8 weeks</b></td><td>6 months</td><td>4 months</td></tr>
+<tr><td>Starting Price</td><td>$800K</td><td>$950K</td><td>$700K</td></tr>
+</table>
+
+<div class="talking-point">
+&#8220;Molly, Spencer, and Renee each sent me separate emails and chats about the launch. Copilot stitched them together into one coherent status update.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 6: Draft a Deliverable</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Draft an executive summary for the ProLine X launch plan. Include the launch 
+timeline, product highlights, target accounts and total pipeline value, 
+competitive positioning, and key risks. This is for a board update.</pre>
+
+<p><b>What Copilot creates:</b> A board-ready summary including:</p>
+<ul>
+<li>Launch objective + June 9 GA date (from Molly&#8217;s email)</li>
+<li>Product highlights: 40% faster, AI/ML, Azure IoT, modular design</li>
+<li>Top 10 target accounts with $10M+ pipeline (from Spencer&#8217;s email)</li>
+<li>Competitive positioning table (from Renee&#8217;s email)</li>
+<li>Risks: engineering delay, Fabrikam pricing counter-move, reference customer availability (from David&#8217;s email)</li>
+</ul>
+
+<div class="talking-point">
+&#8220;Molly needs this for the board deck by Friday. Instead of starting from a blank page, Copilot assembled it from the information my team already gave me. Real numbers, real context.&#8221;
+</div>
+
+<hr>
+
+<h2>Key Messages</h2>
+
+<table>
+<tr><th>#</th><th>Message</th></tr>
+<tr><td>1</td><td><b>One interface, all your data</b> &#8212; emails, chats, files, calendar, and CRM in one prompt</td></tr>
+<tr><td>2</td><td><b>No app switching</b> &#8212; you don&#8217;t open Outlook, then Teams, then Dynamics, then Word</td></tr>
+<tr><td>3</td><td><b>Grounded in YOUR data</b> &#8212; these aren&#8217;t generic answers, they&#8217;re from your actual conversations</td></tr>
+<tr><td>4</td><td><b>From insight to action</b> &#8212; catch up, prep, research, and draft without leaving Copilot</td></tr>
+</table>
+
+<hr>
+
+<h2>Demo Flow Options</h2>
+
+<table>
+<tr><th>Format</th><th>Duration</th><th>Prompts</th></tr>
+<tr><td><b>Full flow</b></td><td>~12 min</td><td>All 6 prompts</td></tr>
+<tr><td><b>Quick hit</b></td><td>~5 min</td><td>1, 2, 6 (catch up &#8594; deal deep dive &#8594; draft)</td></tr>
+<tr><td><b>Sales-focused</b></td><td>~8 min</td><td>1, 2, 3, 4 (catch up &#8594; deal &#8594; prep &#8594; research)</td></tr>
+</table>
+
+<hr>
+
+<h2>Pre-Demo Checklist</h2>
+
+<ul class="checklist">
+<li>Run <code>.\Load-DemoData.ps1</code></li>
+<li>Verify emails visible in Outlook (Adatum and ProLine X threads)</li>
+<li>Verify calendar (Thursday: Adatum Corp at 10 AM, Launch Kickoff at 1 PM)</li>
+<li>Verify D365 records (Accounts: Adatum Corp, Contoso Manufacturing, Tailspin Industries)</li>
+<li>Open Copilot Chat (microsoft365.com/chat or Teams Copilot app)</li>
+<li>Close all non-demo browser tabs</li>
+<li>Set calendar view to week of April 27, 2026</li>
+</ul>
+
+<h2>Reset Between Demos</h2>
+
+<pre>.\Reset-DemoData.ps1        # clean everything
+.\Load-DemoData.ps1          # reload fresh</pre>
+
+</body>
+</html>
