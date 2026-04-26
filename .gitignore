@@ -3,3 +3,8 @@ config.json
 
 # PowerShell module cache
 *.psm1.cache
+
+# Word temp files
+~WRD*.tmp
+~$*.doc
+~$*.docx

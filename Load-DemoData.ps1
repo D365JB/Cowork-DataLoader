@@ -322,27 +322,34 @@ if ($emails.Count -gt 0) {
     Write-Host ""
 }
 
-# ── Execute: Chats (AppOnly auth - Migration API) ────────────────────────────
+# ── Execute: Chats & Channels (AppOnly auth - Migration API) ─────────────────
 
-if ($chats.Count -gt 0) {
+if ($chats.Count -gt 0 -or $channelMessages.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
-    Write-Host "TEAMS CHATS (app-only auth - migration API)" -ForegroundColor Cyan
+    Write-Host "TEAMS CHATS & CHANNELS (app-only auth - Migration API)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
 
     $connected = Connect-DemoGraphAppOnly -Config $config
     if ($connected) {
-        Write-Host ""
-        Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
-        Send-DemoChats -Config $config -Chats $chats
+        if ($chats.Count -gt 0) {
+            Write-Host ""
+            Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
+            Send-DemoChats -Config $config -Chats $chats
+        }
+        if ($channelMessages.Count -gt 0) {
+            Write-Host ""
+            Write-Host "TEAMS CHANNELS:" -ForegroundColor Cyan
+            Send-DemoChannelMessages -Config $config -ChannelMessages $channelMessages
+        }
     } else {
-        Write-Host "[SKIP] Chats skipped - could not authenticate." -ForegroundColor Yellow
+        Write-Host "[SKIP] Chats/Channels skipped - could not authenticate." -ForegroundColor Yellow
     }
     Write-Host ""
 }
 
 # ── Execute: Calendar + Files + SharePoint (Delegated auth) ─────────────────
 
-if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $skills.Count -gt 0 -or $channelMessages.Count -gt 0) {
+if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $skills.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
     Write-Host "CALENDAR, FILES & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
@@ -351,7 +358,7 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $ski
     if ($events.Count -gt 0)   { $scopes += "Calendars.ReadWrite" }
     if ($files.Count -gt 0)    { $scopes += "Files.ReadWrite.All" }
     if ($skills.Count -gt 0)   { $scopes += "Files.ReadWrite.All" }
-    if ($channelMessages.Count -gt 0) { $scopes += "Group.ReadWrite.All"; $scopes += "Channel.Create"; $scopes += "ChannelMessage.Send"; $scopes += "ChannelMessage.Read.All" }
+
     if ($spFiles.Count -gt 0)  { $scopes += "Sites.ReadWrite.All"; $scopes += "Group.ReadWrite.All" }
     $scopes += "User.Read.All"
 
@@ -377,11 +384,7 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $ski
             Write-Host "COWORK SKILLS:" -ForegroundColor Cyan
             Deploy-CoworkSkills -Config $config -Skills $skills -DataDir $dataDir
         }
-        if ($channelMessages.Count -gt 0) {
-            Write-Host ""
-            Write-Host "TEAMS CHANNELS:" -ForegroundColor Cyan
-            Send-DemoChannelMessages -Config $config -ChannelMessages $channelMessages
-        }
+
     } else {
         Write-Host "[SKIP] Calendar/Files/SharePoint/Skills/Channels skipped - could not authenticate." -ForegroundColor Yellow
     }

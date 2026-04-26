@@ -113,34 +113,31 @@ function Send-DemoChats {
                 $chatId = $chatResult["id"]
             }
 
-            # ── If not in migration mode, check for existing messages ────────
+            # ── If not in migration mode, try startMigration on existing chat ──
             if (-not $inMigrationMode) {
-                try {
-                    $chatMsgs = Invoke-MgGraphRequest -Method GET `
-                        -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages?`$top=5"
-                    $realMsgs = @($chatMsgs.value | Where-Object { $_.messageType -eq 'message' })
-                    if ($realMsgs.Count -gt 0) {
-                        Write-Host "    [SKIP] Messages already exist (chat messages cannot be updated)" -ForegroundColor DarkGray
-                        $skipped += $msgs.Count
-                        continue
-                    }
-                }
-                catch {
-                    Write-Host "    [WARN] Could not check existing messages: $($_.Exception.Message)" -ForegroundColor Yellow
-                }
-
-                # Chat exists but has no user messages - try startMigration
                 try {
                     $startBody = @{ conversationCreationDateTime = $migrationStart }
                     Invoke-MgGraphRequest -Method POST `
                         -Uri "https://graph.microsoft.com/beta/chats/$chatId/startMigration" `
                         -Body $startBody | Out-Null
                     $inMigrationMode = $true
+                    Write-Host "    [OK] Entered migration mode on existing chat" -ForegroundColor Green
                 }
                 catch {
-                    Write-Host "    [WARN] Cannot enter migration mode on existing chat." -ForegroundColor Yellow
-                    Write-Host "    Run Reset-DemoData.ps1 to clean up old chats first." -ForegroundColor DarkGray
-                    $failed += $msgs.Count
+                    # Check if chat already has messages (the usual blocker)
+                    try {
+                        $chatMsgs = Invoke-MgGraphRequest -Method GET `
+                            -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages?`$top=5"
+                        $realMsgs = @($chatMsgs.value | Where-Object { $_.messageType -eq 'message' })
+                    } catch { $realMsgs = @() }
+
+                    if ($realMsgs.Count -gt 0) {
+                        Write-Host "    [SKIP] Chat has $($realMsgs.Count)+ existing messages from prior runs." -ForegroundColor DarkGray
+                        Write-Host "    Delete the chat in Teams client and re-run to fix sender attribution." -ForegroundColor DarkGray
+                    } else {
+                        Write-Host "    [WARN] Cannot enter migration mode: $($_.Exception.Message)" -ForegroundColor Yellow
+                    }
+                    $skipped += $msgs.Count
                     continue
                 }
             }

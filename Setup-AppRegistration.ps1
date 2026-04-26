@@ -1,17 +1,22 @@
 <#
 .SYNOPSIS
     One-time setup: Creates an Entra ID app registration with application
-    permissions for sending emails, chats, and backdated mail placement.
+    permissions for sending emails, chats, and channel messages with correct
+    sender attribution using the Teams Migration API.
 .DESCRIPTION
     Run this once per tenant. It will:
     1. Create an app registration ("Cowork Demo Mail Sender")
     2. Create a client secret
     3. Create a service principal
     4. Grant application permissions with admin consent:
-       - Mail.Send           (send emails as any user)
-       - Mail.ReadWrite      (backdate emails into mailboxes)
-       - Chat.Create         (create Teams chats)
-       - Chat.ReadWrite.All  (send Teams chat messages)
+       - Mail.Send              (send emails as any user)
+       - Mail.ReadWrite         (backdate emails into mailboxes)
+       - Chat.Create            (create Teams chats)
+       - Chat.ReadWrite.All     (send Teams chat messages)
+       - Teamwork.Migrate.All   (import chats/channels with correct senders)
+       - User.Read.All          (resolve user IDs)
+       - Group.Read.All         (find Teams by name)
+       - Channel.Delete.All     (delete old channels before migration reimport)
 
     After running, paste the clientId and clientSecret into config.json.
 
@@ -113,30 +118,39 @@ Write-Host ""
 Write-Host "Step 4: Granting application permissions..." -ForegroundColor Cyan
 
 $graphSp = (Invoke-MgGraphRequest -Method GET `
-    -Uri "https://graph.microsoft.com/v1.0/servicePrincipals?`$filter=appId eq '00000003-0000-0000-c000-000000000000'&`$select=id").value[0]
+    -Uri "https://graph.microsoft.com/v1.0/servicePrincipals?`$filter=appId eq '00000003-0000-0000-c000-000000000000'").value[0]
 
-$permissions = @(
-    @{ name = "Mail.Send";          id = "b633e1c5-b582-4048-a93e-9f11b44c7e96" },
-    @{ name = "Mail.ReadWrite";     id = "e2a3a72e-5f79-4c64-b1b1-878b674786c9" },
-    @{ name = "Chat.Create";        id = "d9c48af6-9ad9-47ad-82c3-63757137b9af" },
-    @{ name = "Chat.ReadWrite.All"; id = "294ce7c9-31ba-490a-ad7d-97a7d075e4ed" }
+$permissionNames = @(
+    "Mail.Send",
+    "Mail.ReadWrite",
+    "Chat.Create",
+    "Chat.ReadWrite.All",
+    "Teamwork.Migrate.All",
+    "User.Read.All",
+    "Group.Read.All",
+    "Channel.Delete.All"
 )
 
-foreach ($perm in $permissions) {
+foreach ($permName in $permissionNames) {
+    $role = $graphSp.appRoles | Where-Object { $_.value -eq $permName }
+    if (-not $role) {
+        Write-Host "  $permName - NOT FOUND in Graph permissions" -ForegroundColor Red
+        continue
+    }
     try {
         $roleBody = @{
             principalId = $spId
             resourceId  = $graphSp.id
-            appRoleId   = $perm.id
+            appRoleId   = $role.id
         }
         Invoke-MgGraphRequest -Method POST `
             -Uri "https://graph.microsoft.com/v1.0/servicePrincipals/$spId/appRoleAssignments" -Body $roleBody | Out-Null
-        Write-Host "  $($perm.name) - granted" -ForegroundColor Green
+        Write-Host "  $permName - granted" -ForegroundColor Green
     } catch {
         if ($_.Exception.Message -match "already exists") {
-            Write-Host "  $($perm.name) - already granted" -ForegroundColor DarkGray
+            Write-Host "  $permName - already granted" -ForegroundColor DarkGray
         } else {
-            Write-Host "  $($perm.name) - FAILED: $($_.Exception.Message)" -ForegroundColor Red
+            Write-Host "  $permName - FAILED: $($_.Exception.Message)" -ForegroundColor Red
         }
     }
 }
