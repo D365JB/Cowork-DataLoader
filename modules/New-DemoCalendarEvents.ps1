@@ -28,15 +28,32 @@ function New-DemoCalendarEvents {
     $ownerAddr = $users[($Events[0].owner)].email
     $startIso  = $weekStart.ToString("yyyy-MM-ddT00:00:00")
     $endIso    = $weekEnd.ToString("yyyy-MM-ddT00:00:00")
-    $existingEvents = @{}
+    $existingEvents = @{}      # key = "subject|startDateTime" → first event id
+    $existingDupes  = @()      # duplicate event ids to clean up
     try {
-        $calUri = "https://graph.microsoft.com/v1.0/users/$ownerAddr/calendarView?startDateTime=$startIso&endDateTime=$endIso&`$select=id,subject&`$top=100"
-        $result = Invoke-MgGraphRequest -Method GET -Uri $calUri
+        $calUri = "https://graph.microsoft.com/v1.0/users/$ownerAddr/calendarView?startDateTime=$startIso&endDateTime=$endIso&`$select=id,subject,start&`$top=200"
+        $headers = @{ Prefer = "outlook.timezone=""$timeZone""" }
+        $result = Invoke-MgGraphRequest -Method GET -Uri $calUri -Headers $headers
         foreach ($ev in $result.value) {
-            # Store by subject (first match wins for update)
-            if (-not $existingEvents[$ev.subject]) {
-                $existingEvents[$ev.subject] = $ev.id
+            $normDt = ([datetime]::Parse($ev.start.dateTime)).ToString("yyyy-MM-ddTHH:mm")
+            $key = "$($ev.subject)|$normDt"
+            if (-not $existingEvents[$key]) {
+                $existingEvents[$key] = $ev.id
             }
+            else {
+                # Duplicate — mark for cleanup
+                $existingDupes += $ev.id
+            }
+        }
+        # Clean up duplicates from prior runs
+        if ($existingDupes.Count -gt 0) {
+            Write-Host "  [CLEANUP] Removing $($existingDupes.Count) duplicate events..." -ForegroundColor Yellow
+            foreach ($dupeId in $existingDupes) {
+                try {
+                    Invoke-MgGraphRequest -Method DELETE -Uri "https://graph.microsoft.com/v1.0/users/$ownerAddr/events/$dupeId" | Out-Null
+                } catch { }
+            }
+            Write-Host "  [CLEANUP] Done." -ForegroundColor Green
         }
     }
     catch {
@@ -80,7 +97,9 @@ function New-DemoCalendarEvents {
             }
 
             # ── Update existing or create new ────────────────────────────────
-            $existingId = $existingEvents[$evt.subject]
+            $normDt    = ([datetime]::Parse($body.start.dateTime)).ToString("yyyy-MM-ddTHH:mm")
+            $lookupKey  = "$($evt.subject)|$normDt"
+            $existingId = $existingEvents[$lookupKey]
             $dayName = $eventDate.ToString("ddd")
             $timeStr = if ($evt.allDay) { "(all day)" } else { "$($evt.startTime)-$($evt.endTime)" }
 
