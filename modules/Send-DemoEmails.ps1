@@ -8,6 +8,9 @@
     If emails have a "dayOffset" and "time" field, the email is created as a draft
     with a backdated receivedDateTime, then moved to the inbox — giving a realistic
     spread of emails across the demo week. Otherwise sends normally (arrives "now").
+
+    On re-run: searches recipient's mailbox by subject. If a matching email exists,
+    deletes it before creating the new one (upsert behavior, avoids duplicates).
 #>
 
 function Send-DemoEmails {
@@ -19,6 +22,7 @@ function Send-DemoEmails {
     $users = $Config.users
     $weekStart = if ($Config.demo.weekStart) { [datetime]::Parse($Config.demo.weekStart) } else { $null }
     $sent = 0
+    $updated = 0
     $failed = 0
 
     foreach ($email in $Emails) {
@@ -33,6 +37,24 @@ function Send-DemoEmails {
                 foreach ($ccKey in $email.cc) {
                     $ccRecipients += @{ emailAddress = @{ address = $users[$ccKey].email } }
                 }
+            }
+
+            # ── Check for existing email by subject in recipient's mailbox ──
+            $wasUpdate = $false
+            $subjectEscaped = $email.subject -replace "'", "''"
+            try {
+                $searchUri = "https://graph.microsoft.com/v1.0/users/$toAddr/messages?`$filter=subject eq '$subjectEscaped'&`$select=id&`$top=10"
+                $existing = Invoke-MgGraphRequest -Method GET -Uri $searchUri
+                if ($existing.value.Count -gt 0) {
+                    foreach ($oldMsg in $existing.value) {
+                        Invoke-MgGraphRequest -Method DELETE `
+                            -Uri "https://graph.microsoft.com/v1.0/users/$toAddr/messages/$($oldMsg.id)" | Out-Null
+                    }
+                    $wasUpdate = $true
+                }
+            }
+            catch {
+                # If search fails, proceed with creation anyway
             }
 
             # If email has timing info, create as draft with backdated timestamp
@@ -62,8 +84,9 @@ function Send-DemoEmails {
                         -Body $draftMsg | Out-Null
 
                     $dayName = $emailDate.ToString("ddd")
-                    Write-Host "  [OK] $dayName $($email.time) - '$($email.subject)' from $($users[$email.from].displayName)" -ForegroundColor Green
-                    $sent++
+                    $status = if ($wasUpdate) { "UPD" } else { "OK" }
+                    Write-Host "  [$status] $dayName $($email.time) - '$($email.subject)' from $($users[$email.from].displayName)" -ForegroundColor Green
+                    if ($wasUpdate) { $updated++ } else { $sent++ }
                     continue
                 }
                 catch {
@@ -87,7 +110,7 @@ function Send-DemoEmails {
                 -Body $params
 
             Write-Host "  [OK] '$($email.subject)' from $($users[$email.from].displayName)" -ForegroundColor Green
-            $sent++
+            if ($wasUpdate) { $updated++ } else { $sent++ }
         }
         catch {
             Write-Host "  [FAIL] '$($email.subject)' - $($_.Exception.Message)" -ForegroundColor Red
@@ -95,5 +118,6 @@ function Send-DemoEmails {
         }
     }
 
-    Write-Host "[EMAILS] $sent sent, $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
+    $statusColor = if ($failed -eq 0) { 'Green' } else { 'Yellow' }
+    Write-Host "[EMAILS] $sent new, $updated updated, $failed failed." -ForegroundColor $statusColor
 }

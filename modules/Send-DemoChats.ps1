@@ -7,6 +7,10 @@
     Messages are sent as the signed-in user (sender attribution in the JSON
     is used for display purposes in the loading output only).
 
+    On re-run: checks if the chat already has messages matching the first message
+    in each conversation. If found, skips the conversation (chat messages cannot
+    be updated or deleted via Graph API).
+
     Requires delegated auth with Chat.ReadWrite permission.
 #>
 
@@ -18,6 +22,7 @@ function Send-DemoChats {
 
     $users = $Config.users
     $sent = 0
+    $skipped = 0
     $failed = 0
 
     # Group messages by conversation (from+to pair)
@@ -60,6 +65,26 @@ function Send-DemoChats {
             $fromName2 = $users[$participants[1]].displayName
             Write-Host "  [CHAT] $fromName1 <-> $fromName2" -ForegroundColor Cyan
 
+            # ── Check if messages already exist in this chat ─────────────────
+            $firstMsgText = ($msgs[0].message -replace '<[^>]+>','').Trim()
+            $firstMsgSnippet = $firstMsgText.Substring(0, [Math]::Min(40, $firstMsgText.Length))
+            try {
+                $chatMsgs = Invoke-MgGraphRequest -Method GET `
+                    -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages?`$top=20"
+                $existingTexts = $chatMsgs.value | ForEach-Object {
+                    ($_.body.content -replace '<[^>]+>','').Trim()
+                }
+                $alreadyExists = $existingTexts | Where-Object { $_ -like "*$firstMsgSnippet*" }
+                if ($alreadyExists) {
+                    Write-Host "    [SKIP] Messages already exist (chat messages cannot be updated)" -ForegroundColor DarkGray
+                    $skipped += $msgs.Count
+                    continue
+                }
+            }
+            catch {
+                # If check fails, proceed with sending
+            }
+
             # Send each message in order
             foreach ($msg in $msgs) {
                 $senderAddr = $users[$msg.from].email
@@ -87,7 +112,7 @@ function Send-DemoChats {
         }
     }
 
-    Write-Host "[CHATS] $sent messages sent, $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
+    Write-Host "[CHATS] $sent new, $skipped skipped (existing), $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
     if ($failed -gt 0) {
         Write-Host "  TIP: Ensure delegated auth includes Chat.ReadWrite scope and the signed-in user is a chat participant." -ForegroundColor DarkGray
     }

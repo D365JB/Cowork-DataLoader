@@ -102,7 +102,7 @@ Valid data types: `All`, `Emails`, `Calendar`, `Files`, `Chats`, `SharePoint`, `
 | Files | Delegated (interactive) | `Files.ReadWrite.All` | Upload to signed-in user's OneDrive |
 | SharePoint | Delegated (interactive) | `Sites.ReadWrite.All`, `Group.ReadWrite.All` | Create team site + upload docs |
 | Skills | Delegated (interactive) | `Files.ReadWrite.All` | Upload skill files to OneDrive |
-| Channels | Delegated (interactive) | `Group.ReadWrite.All`, `Channel.Create`, `ChannelMessage.Send` | Create team, channels, post messages |
+| Channels | Delegated (interactive) | `Group.ReadWrite.All`, `Channel.Create`, `ChannelMessage.Send`, `ChannelMessage.Read.All` | Create team, channels, post messages; read for dedup |
 | D365 | AppOnly (client creds) | Dataverse app user | Create accounts, contacts, opportunities |
 
 ## Email Backdating
@@ -137,6 +137,22 @@ Emails include `dayOffset` and `time` fields to create realistic arrival timesta
 - **Add channel messages**: Edit `data/channel-messages.json`. Set `channelName`, `from`, `dayOffset`.
 - **Add skills**: Create `data/skills/{name}/SKILL.md` and add entry to `data/skills.json`.
 - **New tenant**: Copy folder, update `config.json`, run `Setup-AppRegistration.ps1`.
+
+## Idempotent Re-runs
+
+The loader is safe to run multiple times. Each data type handles duplicates differently:
+
+| Data Type | Strategy | Details |
+|-----------|----------|---------|
+| Emails | Delete + recreate | Searches recipient mailbox by subject; deletes old copy, creates new one |
+| Calendar | Patch existing | Pre-fetches week's events; updates matching subjects via PATCH |
+| Chats | Skip existing | Checks if conversation already has messages; skips if so |
+| Channels | Skip existing | Reads channel messages; skips if message snippet already present |
+| Files | Overwrite | Uploads replace existing files at the same path |
+| SharePoint | Overwrite | Same as Files |
+| Skills | Overwrite | Same as Files |
+
+Re-running shows `[UPD]` for updated records and `[SKIP]` for skipped duplicates.
 
 ## Troubleshooting
 

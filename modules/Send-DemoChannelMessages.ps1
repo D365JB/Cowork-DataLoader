@@ -153,12 +153,44 @@ function Send-DemoChannelMessages {
         }
     }
 
+    # ── Pre-fetch existing messages per channel for dedup ───────────────────
+    $existingMsgTexts = @{}
+    foreach ($chName in $channelMap.Keys) {
+        $chId = $channelMap[$chName]
+        try {
+            $chMsgs = Invoke-MgGraphRequest -Method GET `
+                -Uri "https://graph.microsoft.com/v1.0/teams/$teamId/channels/$chId/messages"
+            $existingMsgTexts[$chName] = @()
+            foreach ($m in $chMsgs.value) {
+                $text = ($m.body.content -replace '<[^>]+>','').Trim()
+                if ($text.Length -gt 30) {
+                    $existingMsgTexts[$chName] += $text.Substring(0, 30)
+                }
+            }
+        }
+        catch {
+            $existingMsgTexts[$chName] = @()
+        }
+    }
+
     # ── Post messages ────────────────────────────────────────────────────────
+    $skipped = 0
     foreach ($msg in ($ChannelMessages | Sort-Object { $_.dayOffset }, { $_.time })) {
         $chId = $channelMap[$msg.channel]
         if (-not $chId) {
             Write-Host "  [SKIP] No channel ID for '$($msg.channel)'" -ForegroundColor Yellow
             $failed++
+            continue
+        }
+
+        # ── Check if message already exists ──────────────────────────────────
+        $msgPlain = ($msg.message -replace '<[^>]+>','').Trim()
+        $msgSnippet = if ($msgPlain.Length -gt 30) { $msgPlain.Substring(0, 30) } else { $msgPlain }
+        $alreadyPosted = $existingMsgTexts[$msg.channel] | Where-Object { $_ -eq $msgSnippet }
+        if ($alreadyPosted) {
+            $fromName = $users[$msg.from].displayName
+            Write-Host "  [SKIP] #$($msg.channel) - $fromName : already exists" -ForegroundColor DarkGray
+            $skipped++
             continue
         }
 
@@ -185,5 +217,5 @@ function Send-DemoChannelMessages {
         }
     }
 
-    Write-Host "[CHANNELS] $sent messages posted, $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
+    Write-Host "[CHANNELS] $sent new, $skipped skipped (existing), $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
 }

@@ -334,7 +334,7 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
     if ($files.Count -gt 0)    { $scopes += "Files.ReadWrite.All" }
     if ($chats.Count -gt 0)    { $scopes += "Chat.ReadWrite" }
     if ($skills.Count -gt 0)   { $scopes += "Files.ReadWrite.All" }
-    if ($channelMessages.Count -gt 0) { $scopes += "Group.ReadWrite.All"; $scopes += "Channel.Create"; $scopes += "ChannelMessage.Send" }
+    if ($channelMessages.Count -gt 0) { $scopes += "Group.ReadWrite.All"; $scopes += "Channel.Create"; $scopes += "ChannelMessage.Send"; $scopes += "ChannelMessage.Read.All" }
     if ($spFiles.Count -gt 0)  { $scopes += "Sites.ReadWrite.All"; $scopes += "Group.ReadWrite.All" }
     $scopes += "User.Read.All"
 
