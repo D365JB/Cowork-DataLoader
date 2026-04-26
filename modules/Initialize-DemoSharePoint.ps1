@@ -113,9 +113,15 @@ function Initialize-DemoSharePoint {
                     $failed++
                     continue
                 }
-                $content = Get-Content $localPath -Raw
+                $contentType = Get-MimeType $spFile.localFile
+                if (Test-BinaryFile $spFile.localFile) {
+                    $bodyBytes = [System.IO.File]::ReadAllBytes($localPath)
+                } else {
+                    $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes((Get-Content $localPath -Raw))
+                }
             } elseif ($spFile.sourceType -eq "inline") {
-                $content = $spFile.content
+                $bodyBytes   = [System.Text.Encoding]::UTF8.GetBytes($spFile.content)
+                $contentType = 'text/plain'
             } else {
                 Write-Host "  [SKIP] Unknown sourceType: $($spFile.sourceType)" -ForegroundColor Yellow
                 $failed++
@@ -126,8 +132,8 @@ function Initialize-DemoSharePoint {
             $uri = "https://graph.microsoft.com/v1.0/sites/$siteId/drive/root:/$encodedPath" + ":/content"
 
             Invoke-MgGraphRequest -Method PUT -Uri $uri `
-                -ContentType "text/plain" `
-                -Body ([System.Text.Encoding]::UTF8.GetBytes($content)) | Out-Null
+                -ContentType $contentType `
+                -Body $bodyBytes | Out-Null
 
             Write-Host "  [OK] $remotePath -> $siteDisplayName" -ForegroundColor Green
             $uploaded++

@@ -97,5 +97,155 @@
     "dayOffset": 2, "time": "14:30",
     "subject": "RE: Launch plan exec summary - can help review",
     "body": "<p>James,</p><p>Saw Molly's email about the exec summary. I know you have a lot on your plate this week with the Adatum prep too.</p><p>Happy to help - if you can get the <b>milestones, risks, and budget sections</b> filled in, I can review and polish the whole thing over the weekend. The board deck is due Monday morning.</p><p>Also, for the risks section - I'd suggest flagging:</p><ul><li>Engineering delay risk (June 9 GA date is tight)</li><li>Fabrikam pricing counter-move</li><li>Reference customer availability for launch activities</li></ul><p>Let me know how I can help.</p><p>- David</p>"
+  },
+  {
+    "scenario": "Escalation",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["molly"],
+    "dayOffset": 2, "time": "16:55",
+    "subject": "URGENT - Fabrikam undercutting us at Wide World Importers",
+    "body": "<p>James,</p><p>Just got off a call with my contact at Wide World Importers. <b>Fabrikam has dropped their X200 price by 20%</b> to try to lock in the deal before our ProLine X launch.</p><p>They're offering $760K all-in vs our $900K proposal. Their deployment timeline is still 6 months though.</p><p>I need to respond by Friday. Options:</p><ol><li>Match the price (kills our margin)</li><li>Hold price and sell on speed + AI value (risky)</li><li>Offer a <b>pilot program</b> at reduced cost to prove ROI first</li></ol><p>I recommend option 3 - it plays to our strengths and gets us in the door. Can we discuss tomorrow morning?</p><p>- Spencer</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Escalation",
+    "from": "molly",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 3, "time": "08:15",
+    "subject": "ProLine X GA date at risk - engineering update",
+    "body": "<p>James,</p><p>Quick heads up - engineering flagged a potential issue with the <b>IoT sensor calibration module</b>. The testing team found edge cases in high-humidity environments that cause accuracy drift.</p><p>Impact assessment:</p><ul><li><b>Best case:</b> Fix shipped by May 25, GA stays June 9</li><li><b>Worst case:</b> 2-week delay, GA moves to June 23</li></ul><p>I've asked the engineering lead to join our Thursday standup with a status update. For now, I'd recommend we <b>don't mention the June 9 date to Adatum</b> until we have clarity.</p><p>Thoughts?</p><p>- Molly</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Weekly Status",
+    "from": "david",
+    "to": "james",
+    "cc": ["spencer", "molly", "renee"],
+    "dayOffset": 0, "time": "07:30",
+    "subject": "Weekly team standup agenda - April 27",
+    "body": "<p>Team,</p><p>Here's the agenda for this morning's standup:</p><ol><li><b>Adatum Corp prep status</b> (Spencer + James)</li><li><b>ProLine X launch plan</b> - milestones update (Molly)</li><li><b>Competitive battle cards</b> - review draft (Renee)</li><li><b>Pipeline review</b> - Q2 forecast (Spencer)</li><li><b>Open items and blockers</b></li></ol><p>Please come prepared with your updates. I'll keep us to 30 minutes.</p><p>Meeting link: <a href=\"#\">Teams Meeting</a></p><p>- David</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Customer Update",
+    "from": "spencer",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 2, "time": "11:45",
+    "subject": "Contoso Manufacturing wants to upgrade to ProLine X",
+    "body": "<p>James,</p><p>Great news - <b>Contoso Manufacturing</b> proactively reached out about upgrading from ProLine S to ProLine X. Their plant manager in Detroit saw our preview materials and is very interested in the AI predictive maintenance features.</p><p>Key details:</p><ul><li>Current contract: ProLine S, 3 plants, $1.2M/yr</li><li>Upgrade interest: ProLine X for all 3 plants + 2 new locations</li><li>Estimated deal: <b>$1.8M</b></li><li>Timeline: Want to start implementation in Q3</li></ul><p>This could be our <b>first ProLine X reference customer</b> if we get them going before GA. Worth discussing whether we offer early access pricing.</p><p>- Spencer</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Customer Update",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["david"],
+    "dayOffset": 3, "time": "09:30",
+    "subject": "Tailspin Industries - CTO meeting request",
+    "body": "<p>James,</p><p>Tailspin Industries' CTO (Sarah Martinez) wants to meet next week to discuss ProLine X. She's particularly interested in:</p><ul><li>AI/ML capabilities for quality control</li><li>Azure IoT integration architecture</li><li>How we handle data sovereignty (they have plants in EU)</li></ul><p>This is a $1.2M greenfield opportunity. She specifically asked for someone at VP level to attend. Can you join? I'm thinking next Tuesday or Wednesday.</p><p>David - can you find a time that works?</p><p>- Spencer</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Internal Ops",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 1, "time": "08:00",
+    "subject": "Q2 board deck - your section due Friday",
+    "body": "<p>James,</p><p>Reminder that the <b>Q2 board deck</b> is being assembled this week. Your section covers:</p><ul><li>Operations team update (headcount, key hires)</li><li>ProLine X launch readiness</li><li>Pipeline summary and Q2 forecast</li><li>Key risks and mitigations</li></ul><p>Slides are due to me by <b>Friday 3 PM</b>. I'll do the final assembly over the weekend for Monday's board meeting.</p><p>Template is in the SharePoint site under /Board Decks/Q2 2026 Template.pptx.</p><p>- David</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Internal Ops",
+    "from": "renee",
+    "to": "james",
+    "cc": ["molly"],
+    "dayOffset": 3, "time": "10:00",
+    "subject": "ProLine X press release draft - need your review",
+    "body": "<p>James,</p><p>Attached is the draft press release for the ProLine X launch. Key messages:</p><ul><li>\"Apex Manufacturing redefines manufacturing automation with ProLine X\"</li><li>40% performance improvement over previous generation</li><li>Built-in AI for predictive maintenance</li><li>3 launch customers already committed (pending Adatum)</li></ul><p>I need your review by <b>Thursday EOD</b> so we can get legal sign-off next week. Pay special attention to the customer quotes - we need to confirm we have permission to use them.</p><p>Molly - can you verify the technical specs are accurate?</p><p>- Renee</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Finance",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 0, "time": "15:30",
+    "subject": "Travel and events budget - need your approval",
+    "body": "<p>James,</p><p>Finance is asking for final approval on the <b>ProLine X launch event budget</b>. Here's the breakdown:</p><table border=\"1\" cellpadding=\"6\" style=\"border-collapse:collapse;\"><tr><th>Item</th><th>Cost</th></tr><tr><td>Launch event venue (Chicago)</td><td>$45,000</td></tr><tr><td>Customer dinner (top 10 accounts)</td><td>$12,000</td></tr><tr><td>Demo equipment and setup</td><td>$28,000</td></tr><tr><td>Travel (sales team, 6 people)</td><td>$18,000</td></tr><tr><td>Marketing collateral and swag</td><td>$8,500</td></tr><tr><td><b>Total</b></td><td><b>$111,500</b></td></tr></table><p>This is within our approved events budget for Q2. Just need your sign-off to release the PO.</p><p>- David</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Meeting Prep",
+    "from": "molly",
+    "to": "james",
+    "cc": ["spencer"],
+    "dayOffset": 2, "time": "09:00",
+    "subject": "Demo environment ready for Adatum meeting",
+    "body": "<p>James,</p><p>Good news - the <b>ProLine X demo environment</b> is set up and tested for Thursday's Adatum meeting. Here's what's available:</p><ul><li>Live dashboard showing real-time throughput metrics</li><li>AI predictive maintenance demo (using simulated sensor data)</li><li>Side-by-side comparison: ProLine S vs ProLine X performance</li><li>Azure IoT Hub integration demo</li></ul><p>I've also prepared a <b>backup video recording</b> of the demo in case we have connectivity issues during the meeting.</p><p>Spencer - the demo login credentials are in the shared vault. Let me know if you need a quick walkthrough before Thursday.</p><p>- Molly</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Follow-up",
+    "from": "spencer",
+    "to": "james",
+    "cc": ["david", "renee"],
+    "dayOffset": 3, "time": "14:45",
+    "subject": "Adatum meeting debrief - action items",
+    "body": "<p>Team,</p><p>Great meeting with Adatum today. Here's my debrief:</p><p><b>What went well:</b></p><ul><li>Lisa Chen was impressed with the 8-week deployment timeline</li><li>The AI predictive maintenance demo got a strong reaction from Marcus Webb</li><li>They acknowledged our ProLine S track record</li></ul><p><b>Concerns raised:</b></p><ul><li>Lisa wants to see <b>reference customers</b> in food manufacturing (we're thin here)</li><li>Marcus asked about <b>SAP integration depth</b> - we need to follow up</li><li>Budget approval needs to happen by <b>June 30</b> - tight timeline</li></ul><p><b>Action items:</b></p><ol><li>[Spencer] Send formal proposal by May 5</li><li>[James] Arrange reference call with Contoso Manufacturing</li><li>[Renee] Prepare food manufacturing case study</li><li>[David] Schedule technical deep-dive meeting for mid-May</li></ol><p>Overall feeling: <b>70% confident</b> we close this. The Fabrikam 6-month deployment is a real problem for them.</p><p>- Spencer</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Follow-up",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 3, "time": "16:20",
+    "subject": "RE: Adatum meeting debrief - reference customer idea",
+    "body": "<p>James,</p><p>Re: Lisa's request for food manufacturing references - what about <b>Munson's Pickles</b>? They're in our pipeline and they did a successful ProLine S pilot last year in their Cincinnati facility.</p><p>I know they're not on ProLine X yet, but their experience with our platform + the food manufacturing context might work. I can reach out to their plant manager if you want.</p><p>Also - for the SAP integration question, Molly has a technical spec doc that covers our SAP connector. Should I pull that together for Marcus?</p><p>- David</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Team Management",
+    "from": "renee",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 1, "time": "13:45",
+    "subject": "Marketing team capacity concern",
+    "body": "<p>James,</p><p>I want to flag a <b>capacity issue</b> on my team. With the ProLine X launch, Adatum deal support, and our regular campaign commitments, we're stretched thin.</p><p>Current workload:</p><ul><li>ProLine X launch materials (battle cards, press release, website updates)</li><li>Adatum-specific competitive positioning</li><li>Q2 content calendar (3 webinars, 2 case studies, social campaigns)</li><li>Trade show prep for June (Manufacturing Week)</li></ul><p>I have 3 people and we realistically need 4 to hit all deadlines. Options:</p><ol><li>Bring in a <b>contractor</b> for 6 weeks ($15K)</li><li>Push back the trade show prep to July</li><li>Reduce Q2 content calendar scope</li></ol><p>I'd recommend option 1. Can we discuss?</p><p>- Renee</p>",
+    "isRead": true
+  },
+  {
+    "scenario": "Internal Ops",
+    "from": "molly",
+    "to": "james",
+    "cc": ["david"],
+    "dayOffset": 4, "time": "08:30",
+    "subject": "Good news - IoT sensor fix confirmed for May 22",
+    "body": "<p>James,</p><p>Engineering just confirmed the <b>IoT sensor calibration fix</b> will ship May 22 - well ahead of the June 9 GA date. The humidity edge case only affected a specific sensor model that Adatum doesn't use.</p><p><b>GA date: June 9 is confirmed.</b></p><p>The fix has been tested in all our reference environments and passed with flying colors. I'm confident we're good to go.</p><p>David - can you update the launch timeline doc?</p><p>- Molly</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Weekly Status",
+    "from": "david",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 4, "time": "09:45",
+    "subject": "End of week summary - action items tracker",
+    "body": "<p>James,</p><p>Here's where we stand heading into the weekend:</p><p><b>Completed this week:</b></p><ul><li>Adatum meeting - done, follow-ups assigned</li><li>ProLine X demo environment - tested and ready</li><li>Competitive battle cards - first draft complete</li><li>IoT sensor issue - resolved, GA date confirmed</li></ul><p><b>Open items (due next week):</b></p><ul><li>Adatum formal proposal - Spencer, due May 5</li><li>Board deck - your section, due today by 3 PM</li><li>Contoso reference call setup - you, due May 2</li><li>Press release legal review - Renee, due May 2</li><li>Fabrikam counter-strategy for Wide World Importers - Spencer + you, due May 3</li></ul><p><b>Risks:</b></p><ul><li>Wide World Importers - Fabrikam price cut still unresolved</li><li>Marketing capacity - Renee needs contractor approval</li></ul><p>Want me to schedule a quick 15-min sync Monday morning to align on priorities?</p><p>- David</p>",
+    "isRead": false
+  },
+  {
+    "scenario": "Customer Update",
+    "from": "spencer",
+    "to": "james",
+    "cc": [],
+    "dayOffset": 4, "time": "11:15",
+    "subject": "Adventure Works - ready to sign",
+    "body": "<p>James,</p><p>Adventure Works just called. They want to <b>move forward with ProLine X</b> for their Denver facility. Key details:</p><ul><li>Deal value: <b>$850K</b></li><li>Starting with 1 plant, option for 2 more in Q4</li><li>They want to be a <b>launch reference customer</b> (great for us!)</li><li>Target start: July 1 (right after GA)</li></ul><p>This would be our <b>first signed ProLine X customer</b>. Contract is ready for legal review. Can you approve expedited legal review?</p><p>Big win for the team.</p><p>- Spencer</p>",
+    "isRead": false
   }
 ]

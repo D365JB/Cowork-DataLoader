@@ -28,5 +28,35 @@
     "remotePath": "Documents/ProLine X Launch Plan - Exec Summary DRAFT.txt",
     "sourceType": "file",
     "localFile": "ProLine X Launch Plan - Exec Summary DRAFT.txt"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/Adatum Corp Meeting Notes - Jan 15.docx",
+    "sourceType": "file",
+    "localFile": "Adatum Corp Meeting Notes - Jan 15.docx"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Launch Plan - Exec Summary.docx",
+    "sourceType": "file",
+    "localFile": "ProLine X Launch Plan - Exec Summary.docx"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/Adatum Corp Briefing Deck.pptx",
+    "sourceType": "file",
+    "localFile": "Adatum Corp Briefing Deck.pptx"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Pipeline Tracker.xlsx",
+    "sourceType": "file",
+    "localFile": "ProLine X Pipeline Tracker.xlsx"
+  },
+  {
+    "owner": "james",
+    "remotePath": "Documents/ProLine X Competitive Analysis.xlsx",
+    "sourceType": "file",
+    "localFile": "ProLine X Competitive Analysis.xlsx"
   }
 ]

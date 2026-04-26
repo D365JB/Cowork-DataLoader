@@ -1,0 +1,92 @@
+[
+  {
+    "channel": "ProLine X Launch",
+    "from": "molly",
+    "message": "<p><b>ProLine X Launch Kickoff</b></p><p>Welcome to the ProLine X Launch channel! Use this for all launch-related updates, questions, and coordination.</p><p>Key dates:</p><ul><li>GA target: June 9, 2026</li><li>Sales enablement materials: May 15</li><li>Press release: May 20</li><li>Launch event: June 12</li></ul><p>Let's make this our biggest launch yet!</p>",
+    "dayOffset": -3, "time": "09:00"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "renee",
+    "message": "<p>Battle cards are in progress. First draft covers Fabrikam X200 and Northwind NX-Pro. Should have them ready by Wednesday.</p><p>Quick question for everyone: are we positioning ProLine X as a <b>replacement</b> for ProLine S or an <b>upgrade path</b>? This matters for messaging.</p>",
+    "dayOffset": -3, "time": "10:30"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "spencer",
+    "message": "<p>Upgrade path for existing customers, new platform for greenfield. Different messaging tracks for each.</p><p>Also - just confirmed Adatum meeting for Thursday this week. Pipeline is looking strong.</p>",
+    "dayOffset": -3, "time": "11:15"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "molly",
+    "message": "<p><b>Update:</b> Engineering flagged a potential issue with IoT sensor calibration in high-humidity environments. They're investigating. Will update by Thursday.</p><p>For now, <b>do not commit to June 9 GA date externally</b> until we have clarity.</p>",
+    "dayOffset": 2, "time": "08:30"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "david",
+    "message": "<p>Noted. I've added this to the risk tracker. Molly - can you get engineering to join Thursday standup with a status update?</p>",
+    "dayOffset": 2, "time": "08:45"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "molly",
+    "message": "<p><b>Great news!</b> Engineering confirmed the IoT sensor fix ships May 22. GA date June 9 is <b>confirmed</b>. The issue only affected a specific sensor model. All clear to proceed with external commitments.</p>",
+    "dayOffset": 4, "time": "08:45"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "spencer",
+    "message": "<p><b>Big win!</b> Adventure Works is ready to sign. $850K deal, want to be a launch reference customer. Starting July 1. This could be our first signed ProLine X customer!</p>",
+    "dayOffset": 4, "time": "11:30"
+  },
+  {
+    "channel": "ProLine X Launch",
+    "from": "renee",
+    "message": "<p>That's fantastic! Can we get a quote from Adventure Works for the press release? I need it by May 8 for legal review.</p>",
+    "dayOffset": 4, "time": "11:45"
+  },
+  {
+    "channel": "Adatum Deal Room",
+    "from": "spencer",
+    "message": "<p><b>Adatum Corp - Deal Room</b></p><p>Using this channel to coordinate everything related to the Adatum $2.4M opportunity. Key contacts:</p><ul><li>Lisa Chen - VP Procurement (decision maker)</li><li>Marcus Webb - Director of Operations (technical influencer)</li></ul><p>Meeting Thursday this week. Let's close this one.</p>",
+    "dayOffset": 0, "time": "09:00"
+  },
+  {
+    "channel": "Adatum Deal Room",
+    "from": "david",
+    "message": "<p>Pulled January meeting notes. Key takeaway: they committed to a pilot if we show 15% throughput improvement. Our ProLine S data shows 18.3%. Should be a slam dunk on that front.</p><p>Budget deadline: June 30 or it rolls to next FY.</p>",
+    "dayOffset": 0, "time": "14:30"
+  },
+  {
+    "channel": "Adatum Deal Room",
+    "from": "renee",
+    "message": "<p>Competitive positioning slides are done. Key messages: we deploy in 8 weeks vs Fabrikam's 6 months, AI is included (not a $150K add-on), Azure IoT native.</p><p>Uploaded to SharePoint under Adatum Corp folder.</p>",
+    "dayOffset": 1, "time": "17:00"
+  },
+  {
+    "channel": "Adatum Deal Room",
+    "from": "spencer",
+    "message": "<p><b>Post-meeting update:</b> Meeting went well. Lisa was impressed with deployment speed. Marcus liked the AI demo. Two follow-ups needed:</p><ol><li>Reference customer in food manufacturing</li><li>SAP integration deep-dive</li></ol><p>I'll have the formal proposal ready by May 5. Feeling 70% confident on close.</p>",
+    "dayOffset": 3, "time": "15:00"
+  },
+  {
+    "channel": "Adatum Deal Room",
+    "from": "david",
+    "message": "<p>For the food manufacturing reference - what about Munson's Pickles? They did a successful ProLine S pilot last year. Not on X yet but the context is relevant.</p>",
+    "dayOffset": 3, "time": "16:30"
+  },
+  {
+    "channel": "General",
+    "from": "david",
+    "message": "<p>Reminder: Q2 board deck sections are due <b>Friday at 3 PM</b>. Please submit to me directly. Template is in SharePoint.</p>",
+    "dayOffset": 1, "time": "08:00"
+  },
+  {
+    "channel": "General",
+    "from": "molly",
+    "message": "<p>Heads up - the ProLine X preview video is now available for customer-facing use. Link in the product channel. Please use the approved version only - no screen recordings of the beta build.</p>",
+    "dayOffset": 2, "time": "11:00"
+  }
+]

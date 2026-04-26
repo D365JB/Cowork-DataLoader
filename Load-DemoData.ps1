@@ -37,7 +37,7 @@
 #>
 
 param(
-    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")]
+    [ValidateSet("All", "Emails", "Calendar", "Files", "Chats", "SharePoint", "Skills", "Channels", "D365")]
     [string[]]$DataTypes = @("All"),
 
     [string]$ConfigPath = (Join-Path $PSScriptRoot "config.json"),
@@ -59,6 +59,8 @@ $modulesDir = Join-Path $scriptRoot "modules"
 . (Join-Path $modulesDir "Upload-DemoFiles.ps1")
 . (Join-Path $modulesDir "Send-DemoChats.ps1")
 . (Join-Path $modulesDir "Initialize-DemoSharePoint.ps1")
+. (Join-Path $modulesDir "Deploy-CoworkSkills.ps1")
+. (Join-Path $modulesDir "Send-DemoChannelMessages.ps1")
 . (Join-Path $modulesDir "Connect-DemoDataverse.ps1")
 . (Join-Path $modulesDir "Initialize-DemoD365.ps1")
 
@@ -88,7 +90,7 @@ $config = Get-Content $ConfigPath -Raw | ConvertFrom-Json | ConvertTo-Hashtable
 
 # Resolve "All"
 if ($DataTypes -contains "All") {
-    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint", "D365")
+    $DataTypes = @("Emails", "Calendar", "Files", "Chats", "SharePoint", "Skills", "Channels", "D365")
 }
 
 # ── Banner ───────────────────────────────────────────────────────────────────
@@ -162,6 +164,28 @@ if ($DataTypes -contains "SharePoint") {
     }
 }
 
+$channelMessages = @()
+if ($DataTypes -contains "Channels") {
+    $chPath = Join-Path $dataDir "channel-messages.json"
+    if (Test-Path $chPath) {
+        $channelMessages = Get-Content $chPath -Raw | ConvertFrom-Json
+        Write-Host "  Loaded $($channelMessages.Count) channel messages from channel-messages.json" -ForegroundColor DarkGray
+    } else {
+        Write-Host "  [WARN] channel-messages.json not found - skipping" -ForegroundColor Yellow
+    }
+}
+
+$skills = @()
+if ($DataTypes -contains "Skills") {
+    $skillsPath = Join-Path $dataDir "skills.json"
+    if (Test-Path $skillsPath) {
+        $skills = Get-Content $skillsPath -Raw | ConvertFrom-Json
+        Write-Host "  Loaded $($skills.Count) Cowork skills from skills.json" -ForegroundColor DarkGray
+    } else {
+        Write-Host "  [WARN] skills.json not found - skipping" -ForegroundColor Yellow
+    }
+}
+
 $d365Records = $null
 if ($DataTypes -contains "D365") {
     $d365Path = Join-Path $dataDir "d365-records.json"
@@ -231,6 +255,24 @@ if ($WhatIf) {
         Write-Host ""
     }
 
+    if ($channelMessages.Count -gt 0) {
+        $channels = $channelMessages | Select-Object -ExpandProperty channel -Unique
+        Write-Host "TEAMS CHANNELS ($($channelMessages.Count) messages across $($channels.Count) channels):" -ForegroundColor Cyan
+        foreach ($ch in $channels) {
+            $chMsgs = @($channelMessages | Where-Object { $_.channel -eq $ch })
+            Write-Host "  #$ch ($($chMsgs.Count) messages)" -ForegroundColor White
+        }
+        Write-Host ""
+    }
+
+    if ($skills.Count -gt 0) {
+        Write-Host "COWORK SKILLS ($($skills.Count)):" -ForegroundColor Cyan
+        foreach ($sk in $skills) {
+            Write-Host "  $($sk.skillName) -> $($config.users[$sk.owner].displayName)'s OneDrive" -ForegroundColor White
+        }
+        Write-Host ""
+    }
+
     if ($d365Records) {
         $acctCount = @($d365Records.accounts).Count
         $contactCount = @($d365Records.contacts).Count
@@ -282,7 +324,7 @@ if ($emails.Count -gt 0) {
 
 # ── Execute: Calendar + Files + SharePoint (Delegated auth) ─────────────────
 
-if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $chats.Count -gt 0) {
+if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $chats.Count -gt 0 -or $skills.Count -gt 0 -or $channelMessages.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
     Write-Host "CALENDAR, FILES, CHATS & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
@@ -291,6 +333,8 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
     if ($events.Count -gt 0)   { $scopes += "Calendars.ReadWrite" }
     if ($files.Count -gt 0)    { $scopes += "Files.ReadWrite.All" }
     if ($chats.Count -gt 0)    { $scopes += "Chat.ReadWrite" }
+    if ($skills.Count -gt 0)   { $scopes += "Files.ReadWrite.All" }
+    if ($channelMessages.Count -gt 0) { $scopes += "Group.ReadWrite.All"; $scopes += "Channel.Create"; $scopes += "ChannelMessage.Send" }
     if ($spFiles.Count -gt 0)  { $scopes += "Sites.ReadWrite.All"; $scopes += "Group.ReadWrite.All" }
     $scopes += "User.Read.All"
 
@@ -316,8 +360,18 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
             Write-Host "SHAREPOINT SITE & FILES:" -ForegroundColor Cyan
             Initialize-DemoSharePoint -Config $config -SharePointFiles $spFiles -DataDir $dataDir
         }
+        if ($skills.Count -gt 0) {
+            Write-Host ""
+            Write-Host "COWORK SKILLS:" -ForegroundColor Cyan
+            Deploy-CoworkSkills -Config $config -Skills $skills -DataDir $dataDir
+        }
+        if ($channelMessages.Count -gt 0) {
+            Write-Host ""
+            Write-Host "TEAMS CHANNELS:" -ForegroundColor Cyan
+            Send-DemoChannelMessages -Config $config -ChannelMessages $channelMessages
+        }
     } else {
-        Write-Host "[SKIP] Calendar/Files/Chats/SharePoint skipped - could not authenticate." -ForegroundColor Yellow
+        Write-Host "[SKIP] Calendar/Files/Chats/SharePoint/Skills/Channels skipped - could not authenticate." -ForegroundColor Yellow
     }
 }
 

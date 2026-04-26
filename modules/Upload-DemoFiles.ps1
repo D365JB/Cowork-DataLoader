@@ -6,8 +6,46 @@
     - owner: user key from config
     - remotePath: path in OneDrive (e.g. "Documents/filename.txt")
     - sourceType: "inline" (content in JSON) or "file" (local path in data/files/)
+    Supports both text and binary files (Office docs, images, etc.).
     Requires delegated auth with Files.ReadWrite.All.
 #>
+
+# MIME type lookup by file extension
+$script:MimeTypes = @{
+    '.txt'  = 'text/plain'
+    '.md'   = 'text/plain'
+    '.csv'  = 'text/csv'
+    '.json' = 'application/json'
+    '.xml'  = 'application/xml'
+    '.html' = 'text/html'
+    '.htm'  = 'text/html'
+    '.docx' = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    '.doc'  = 'application/msword'
+    '.xlsx' = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    '.xls'  = 'application/vnd.ms-excel'
+    '.pptx' = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+    '.ppt'  = 'application/vnd.ms-powerpoint'
+    '.pdf'  = 'application/pdf'
+    '.png'  = 'image/png'
+    '.jpg'  = 'image/jpeg'
+    '.jpeg' = 'image/jpeg'
+    '.gif'  = 'image/gif'
+    '.zip'  = 'application/zip'
+}
+
+function Get-MimeType {
+    param([string]$FileName)
+    $ext = [System.IO.Path]::GetExtension($FileName).ToLower()
+    if ($script:MimeTypes.ContainsKey($ext)) { return $script:MimeTypes[$ext] }
+    return 'application/octet-stream'
+}
+
+function Test-BinaryFile {
+    param([string]$FileName)
+    $textExts = @('.txt', '.md', '.csv', '.json', '.xml', '.html', '.htm')
+    $ext = [System.IO.Path]::GetExtension($FileName).ToLower()
+    return ($ext -notin $textExts)
+}
 
 function Upload-DemoFiles {
     param(
@@ -26,7 +64,8 @@ function Upload-DemoFiles {
             $remotePath = $file.remotePath
 
             if ($file.sourceType -eq "inline") {
-                $content = $file.content
+                $bodyBytes   = [System.Text.Encoding]::UTF8.GetBytes($file.content)
+                $contentType = 'text/plain'
             } elseif ($file.sourceType -eq "file") {
                 $localPath = Join-Path (Join-Path $DataDir "files") $file.localFile
                 if (-not (Test-Path $localPath)) {
@@ -34,7 +73,12 @@ function Upload-DemoFiles {
                     $failed++
                     continue
                 }
-                $content = Get-Content $localPath -Raw
+                $contentType = Get-MimeType $file.localFile
+                if (Test-BinaryFile $file.localFile) {
+                    $bodyBytes = [System.IO.File]::ReadAllBytes($localPath)
+                } else {
+                    $bodyBytes = [System.Text.Encoding]::UTF8.GetBytes((Get-Content $localPath -Raw))
+                }
             } else {
                 Write-Host "  [SKIP] Unknown sourceType: $($file.sourceType)" -ForegroundColor Yellow
                 $failed++
@@ -45,8 +89,8 @@ function Upload-DemoFiles {
             $uri = "https://graph.microsoft.com/v1.0/users/$ownerAddr/drive/root:/$encodedPath" + ":/content"
 
             Invoke-MgGraphRequest -Method PUT -Uri $uri `
-                -ContentType "text/plain" `
-                -Body ([System.Text.Encoding]::UTF8.GetBytes($content)) | Out-Null
+                -ContentType $contentType `
+                -Body $bodyBytes | Out-Null
 
             Write-Host "  [OK] $remotePath -> $($users[$file.owner].displayName)'s OneDrive" -ForegroundColor Green
             $uploaded++

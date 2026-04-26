@@ -193,14 +193,139 @@ competitive positioning, and key risks. This is for a board update.</pre>
 
 <hr>
 
+<h2>Prompt 7: Work with Office Documents</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Look at the ProLine X Pipeline Tracker spreadsheet in my OneDrive. Which 
+deals are in the Proposal or Negotiation stage? What's the total value 
+of those deals and when are they expected to close?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li>Opens and reads the .xlsx file from OneDrive</li>
+<li>Identifies Adatum Corp ($2.4M, Proposal, Jun 30) and Adventure Works ($850K, Negotiation, Jun 15)</li>
+<li>Calculates combined value: $3.25M expected to close by end of Q2</li>
+<li>May reference related emails about these deals for additional context</li>
+</ul>
+
+<div class="talking-point">
+&#8220;Copilot can read Excel, Word, and PowerPoint files directly. I didn&#8217;t have to open the spreadsheet, find the right rows, and do the math myself. It understands the data.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 8: Summarize a Presentation</h2>
+<p><span class="label">~1 MINUTE</span></p>
+
+<pre>Summarize the Adatum Corp Briefing Deck in my OneDrive. What are the key 
+points and what ROI are we projecting?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li>Reads the .pptx file and summarizes all 10 slides</li>
+<li>Highlights: 8-week implementation, $2.4M total Year 1 investment, 162% 3-year ROI, 14-month payback</li>
+<li>References the reference customer quotes and proposed next steps</li>
+</ul>
+
+<div class="talking-point">
+&#8220;I can ask Copilot to summarize a deck without opening PowerPoint. Great for reviewing materials your team has prepared &#8212; especially when you&#8217;re short on time.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 9: Competitive Analysis</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Based on the competitive analysis spreadsheet and Renee's emails, give me 
+3 key talking points for why Adatum should choose us over Fabrikam and 
+Northwind. Make them punchy - I need these for Thursday's meeting.</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li>Reads the ProLine X Competitive Analysis.xlsx &#8212; feature-by-feature comparison</li>
+<li>Cross-references Renee&#8217;s competitive positioning emails</li>
+<li>Generates 3 sharp talking points, e.g.:<br/>
+    1. &#8220;We deploy in 8 weeks, Fabrikam takes 6 months &#8212; you&#8217;ll see ROI this fiscal year&#8221;<br/>
+    2. &#8220;AI is included in our platform, not a $150K add-on&#8221;<br/>
+    3. &#8220;Azure IoT native &#8212; since you&#8217;re already on Azure, integration is seamless&#8221;</li>
+</ul>
+
+<div class="talking-point">
+&#8220;Copilot combined the spreadsheet data with email context to create talking points that are specific to this customer. It knows Adatum is already on Azure from our team&#8217;s discussions.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 10: Escalation Triage</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>I have a lot going on this week. What are the most urgent items I need 
+to respond to? Anything that needs my attention today or is time-sensitive?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li><b>URGENT:</b> Fabrikam undercutting at Wide World Importers &#8212; Spencer needs response by Friday</li>
+<li><b>AT RISK:</b> Engineering flagged IoT sensor issue (but later resolved)</li>
+<li><b>ACTION NEEDED:</b> Board deck section due Friday 3 PM</li>
+<li><b>REVIEW:</b> Press release draft needs review by Thursday EOD</li>
+<li><b>APPROVE:</b> Launch event budget ($111.5K) and marketing contractor ($15K)</li>
+<li>Unread emails from Spencer (Adventure Works signing), David (end-of-week summary)</li>
+</ul>
+
+<div class="talking-point">
+&#8220;With 26 emails, Teams chats, and channel messages all hitting my inbox, Copilot helps me prioritize. It identified the Fabrikam price cut as the most urgent item &#8212; that&#8217;s the one that could cost us a deal.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 11: Use a Custom Skill</h2>
+<p><span class="label">~2 MINUTES</span></p>
+
+<pre>Create a deal review brief for Adatum Corp.</pre>
+
+<p><b>What Copilot does:</b></p>
+<ul>
+<li>Activates the &#8220;Deal Review Brief&#8221; custom skill from OneDrive</li>
+<li>Automatically gathers: emails, meeting notes, CRM data, Teams discussions, shared documents</li>
+<li>Produces a polished Word document with account overview, relationship timeline, competitive landscape, action items, and recommended next steps</li>
+</ul>
+
+<div class="talking-point">
+&#8220;This is a custom skill I created for Copilot. It&#8217;s a reusable workflow &#8212; I just say &#8216;deal review brief&#8217; and it knows exactly what data to gather and how to format it. Think of skills as your personal playbooks.&#8221;
+</div>
+
+<hr>
+
+<h2>Prompt 12: Channel Context</h2>
+<p><span class="label">~1 MINUTE</span></p>
+
+<pre>What's been discussed in the ProLine X Launch channel and the Adatum Deal 
+Room this week? Any decisions or updates I should know about?</pre>
+
+<p><b>What Copilot surfaces:</b></p>
+<ul>
+<li><b>ProLine X Launch:</b> Engineering issue flagged and resolved; GA confirmed June 9; Adventure Works ready to sign</li>
+<li><b>Adatum Deal Room:</b> January notes resurfaced; competitive slides uploaded; post-meeting debrief with 70% close confidence</li>
+<li>Key decisions: don&#8217;t commit GA date externally (later resolved), food manufacturing reference needed</li>
+</ul>
+
+<div class="talking-point">
+&#8220;Copilot reads Teams channels too &#8212; not just my 1:1 chats. The team has been coordinating across channels all week, and I get a complete picture without scrolling through message threads.&#8221;
+</div>
+
+<hr>
+
 <h2>Key Messages</h2>
 
 <table>
 <tr><th>#</th><th>Message</th></tr>
-<tr><td>1</td><td><b>One interface, all your data</b> &#8212; emails, chats, files, calendar, and CRM in one prompt</td></tr>
-<tr><td>2</td><td><b>No app switching</b> &#8212; you don&#8217;t open Outlook, then Teams, then Dynamics, then Word</td></tr>
-<tr><td>3</td><td><b>Grounded in YOUR data</b> &#8212; these aren&#8217;t generic answers, they&#8217;re from your actual conversations</td></tr>
-<tr><td>4</td><td><b>From insight to action</b> &#8212; catch up, prep, research, and draft without leaving Copilot</td></tr>
+<tr><td>1</td><td><b>One interface, all your data</b> &#8212; emails, chats, channels, files, calendar, and CRM in one prompt</td></tr>
+<tr><td>2</td><td><b>No app switching</b> &#8212; you don&#8217;t open Outlook, then Teams, then Dynamics, then Excel, then Word</td></tr>
+<tr><td>3</td><td><b>Grounded in YOUR data</b> &#8212; these aren&#8217;t generic answers, they&#8217;re from your actual conversations and documents</td></tr>
+<tr><td>4</td><td><b>From insight to action</b> &#8212; catch up, prep, research, analyze, and draft without leaving Copilot</td></tr>
+<tr><td>5</td><td><b>Reads your documents</b> &#8212; Copilot can read and analyze Word, Excel, and PowerPoint files from OneDrive and SharePoint</td></tr>
+<tr><td>6</td><td><b>Custom skills</b> &#8212; create reusable workflows for tasks you do repeatedly (deal reviews, status reports)</td></tr>
+<tr><td>7</td><td><b>Prioritization</b> &#8212; Copilot identifies what&#8217;s urgent, what&#8217;s time-sensitive, and what needs your attention</td></tr>
 </table>
 
 <hr>
@@ -209,9 +334,11 @@ competitive positioning, and key risks. This is for a board update.</pre>
 
 <table>
 <tr><th>Format</th><th>Duration</th><th>Prompts</th></tr>
-<tr><td><b>Full flow</b></td><td>~12 min</td><td>All 6 prompts</td></tr>
+<tr><td><b>Full flow</b></td><td>~20 min</td><td>All 12 prompts</td></tr>
+<tr><td><b>Core demo</b></td><td>~12 min</td><td>1, 2, 5, 6, 7, 10 (catch up &#8594; deal &#8594; launch &#8594; draft &#8594; docs &#8594; triage)</td></tr>
 <tr><td><b>Quick hit</b></td><td>~5 min</td><td>1, 2, 6 (catch up &#8594; deal deep dive &#8594; draft)</td></tr>
-<tr><td><b>Sales-focused</b></td><td>~8 min</td><td>1, 2, 3, 4 (catch up &#8594; deal &#8594; prep &#8594; research)</td></tr>
+<tr><td><b>Sales-focused</b></td><td>~10 min</td><td>1, 2, 3, 7, 9 (catch up &#8594; deal &#8594; prep &#8594; docs &#8594; competitive)</td></tr>
+<tr><td><b>Productivity-focused</b></td><td>~10 min</td><td>1, 7, 8, 10, 11 (catch up &#8594; Excel &#8594; PPT &#8594; triage &#8594; skills)</td></tr>
 </table>
 
 <hr>
@@ -220,9 +347,13 @@ competitive positioning, and key risks. This is for a board update.</pre>
 
 <ul class="checklist">
 <li>Run <code>.\Load-DemoData.ps1</code></li>
-<li>Verify emails visible in Outlook (Adatum and ProLine X threads)</li>
+<li>Verify emails visible in Outlook (26 emails &#8212; Adatum, ProLine X, escalations, status updates)</li>
 <li>Verify calendar (Thursday: Adatum Corp at 10 AM, Launch Kickoff at 1 PM)</li>
 <li>Verify D365 records (Accounts: Adatum Corp, Contoso Manufacturing, Tailspin Industries)</li>
+<li>Verify OneDrive files (.docx, .xlsx, .pptx files appear correctly)</li>
+<li>Verify Teams channels (ProLine X Launch, Adatum Deal Room, General)</li>
+<li>Verify Cowork skills deployed (Documents/Cowork/skills/ in OneDrive)</li>
+<li>Verify SharePoint site (ApexSalesTeam with shared docs)</li>
 <li>Open Copilot Chat (microsoft365.com/chat or Teams Copilot app)</li>
 <li>Close all non-demo browser tabs</li>
 <li>Set calendar view to week of April 27, 2026</li>

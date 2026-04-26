@@ -48,7 +48,7 @@ function Send-DemoEmails {
                     body           = @{ contentType = "HTML"; content = $email.body }
                     from           = @{ emailAddress = @{ address = $fromAddr; name = $users[$email.from].displayName } }
                     toRecipients   = $toRecipients
-                    isRead         = $false
+                    isRead         = if ($null -ne $email.isRead) { $email.isRead } else { $false }
                     receivedDateTime = $isoDate
                     sentDateTime     = $isoDate
                 }
