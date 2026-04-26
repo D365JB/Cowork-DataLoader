@@ -124,8 +124,9 @@ function Send-DemoChannelMessages {
             }
             try {
                 $chBody = @{
-                    displayName = $chName
-                    description = "$chName discussion channel"
+                    displayName    = $chName
+                    description    = "$chName discussion channel"
+                    membershipType = "standard"
                 }
                 $newCh = Invoke-MgGraphRequest -Method POST `
                     -Uri "https://graph.microsoft.com/v1.0/teams/$teamId/channels" -Body $chBody
@@ -133,13 +134,13 @@ function Send-DemoChannelMessages {
                 Write-Host "  [OK] Created channel: $chName" -ForegroundColor Green
             }
             catch {
-                if ($_.Exception.Message -match "NameAlreadyExists") {
-                    # Re-fetch channels
-                    $existingChannels = Invoke-MgGraphRequest -Method GET `
-                        -Uri "https://graph.microsoft.com/v1.0/teams/$teamId/channels"
-                    foreach ($ch in $existingChannels.value) {
-                        if ($ch.displayName -eq $chName) { $channelMap[$chName] = $ch.id }
-                    }
+                # Channel may already exist (NameAlreadyExists or BadRequest) - re-fetch
+                $existingChannels = Invoke-MgGraphRequest -Method GET `
+                    -Uri "https://graph.microsoft.com/v1.0/teams/$teamId/channels"
+                foreach ($ch in $existingChannels.value) {
+                    if ($ch.displayName -eq $chName) { $channelMap[$chName] = $ch.id }
+                }
+                if ($channelMap[$chName]) {
                     Write-Host "  [OK] Channel already exists: $chName" -ForegroundColor DarkGray
                 }
                 else {
