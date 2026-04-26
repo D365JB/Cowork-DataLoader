@@ -322,17 +322,34 @@ if ($emails.Count -gt 0) {
     Write-Host ""
 }
 
+# ── Execute: Chats (AppOnly auth - Migration API) ────────────────────────────
+
+if ($chats.Count -gt 0) {
+    Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
+    Write-Host "TEAMS CHATS (app-only auth - migration API)" -ForegroundColor Cyan
+    Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
+
+    $connected = Connect-DemoGraphAppOnly -Config $config
+    if ($connected) {
+        Write-Host ""
+        Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
+        Send-DemoChats -Config $config -Chats $chats
+    } else {
+        Write-Host "[SKIP] Chats skipped - could not authenticate." -ForegroundColor Yellow
+    }
+    Write-Host ""
+}
+
 # ── Execute: Calendar + Files + SharePoint (Delegated auth) ─────────────────
 
-if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $chats.Count -gt 0 -or $skills.Count -gt 0 -or $channelMessages.Count -gt 0) {
+if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $skills.Count -gt 0 -or $channelMessages.Count -gt 0) {
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
-    Write-Host "CALENDAR, FILES, CHATS & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
+    Write-Host "CALENDAR, FILES & SHAREPOINT (delegated auth)" -ForegroundColor Cyan
     Write-Host "────────────────────────────────────────────" -ForegroundColor DarkGray
 
     $scopes = @()
     if ($events.Count -gt 0)   { $scopes += "Calendars.ReadWrite" }
     if ($files.Count -gt 0)    { $scopes += "Files.ReadWrite.All" }
-    if ($chats.Count -gt 0)    { $scopes += "Chat.ReadWrite" }
     if ($skills.Count -gt 0)   { $scopes += "Files.ReadWrite.All" }
     if ($channelMessages.Count -gt 0) { $scopes += "Group.ReadWrite.All"; $scopes += "Channel.Create"; $scopes += "ChannelMessage.Send"; $scopes += "ChannelMessage.Read.All" }
     if ($spFiles.Count -gt 0)  { $scopes += "Sites.ReadWrite.All"; $scopes += "Group.ReadWrite.All" }
@@ -350,11 +367,6 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
             Write-Host "ONEDRIVE FILES:" -ForegroundColor Cyan
             Upload-DemoFiles -Config $config -Files $files -DataDir $dataDir
         }
-        if ($chats.Count -gt 0) {
-            Write-Host ""
-            Write-Host "TEAMS CHATS:" -ForegroundColor Cyan
-            Send-DemoChats -Config $config -Chats $chats
-        }
         if ($spFiles.Count -gt 0) {
             Write-Host ""
             Write-Host "SHAREPOINT SITE & FILES:" -ForegroundColor Cyan
@@ -371,7 +383,7 @@ if ($events.Count -gt 0 -or $files.Count -gt 0 -or $spFiles.Count -gt 0 -or $cha
             Send-DemoChannelMessages -Config $config -ChannelMessages $channelMessages
         }
     } else {
-        Write-Host "[SKIP] Calendar/Files/Chats/SharePoint/Skills/Channels skipped - could not authenticate." -ForegroundColor Yellow
+        Write-Host "[SKIP] Calendar/Files/SharePoint/Skills/Channels skipped - could not authenticate." -ForegroundColor Yellow
     }
 }
 

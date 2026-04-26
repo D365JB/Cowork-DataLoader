@@ -97,7 +97,7 @@ Valid data types: `All`, `Emails`, `Calendar`, `Files`, `Chats`, `SharePoint`, `
 | Data Type | Auth Flow | Permissions | Why |
 |-----------|-----------|-------------|-----|
 | Emails | AppOnly (client creds) | `Mail.Send`, `Mail.ReadWrite` | Send as any user; backdate timestamps |
-| Chats | AppOnly (client creds) | `Chat.Create`, `Chat.ReadWrite.All` | Create chats and send messages as users |
+| Chats | AppOnly (client creds) | `Chat.Create`, `Chat.ReadWrite.All`, `Teamwork.Migrate.All` | Create chats, import messages as any user |
 | Calendar | Delegated (interactive) | `Calendars.ReadWrite` | Events on signed-in user's calendar |
 | Files | Delegated (interactive) | `Files.ReadWrite.All` | Upload to signed-in user's OneDrive |
 | SharePoint | Delegated (interactive) | `Sites.ReadWrite.All`, `Group.ReadWrite.All` | Create team site + upload docs |

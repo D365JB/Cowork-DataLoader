@@ -1,17 +1,25 @@
 ﻿<#
 .SYNOPSIS
-    Creates Teams 1:1 chat messages between demo users.
+    Creates Teams 1:1 chat messages between demo users with correct sender attribution.
 .DESCRIPTION
-    Uses Graph API to create 1:1 chats and send messages via delegated auth.
-    The signed-in user must be a participant in each chat.
-    Messages are sent as the signed-in user (sender attribution in the JSON
-    is used for display purposes in the loading output only).
+    Uses the Teams Migration API (Teamwork.Migrate.All) to import chat messages
+    with the correct "from" user on each message. This ensures messages appear
+    as sent by the actual demo user, not the admin.
 
-    On re-run: checks if the chat already has messages matching the first message
-    in each conversation. If found, skips the conversation (chat messages cannot
-    be updated or deleted via Graph API).
+    Flow per conversation:
+    1. Create 1:1 chat in migration mode (@microsoft.graph.chatCreationMode)
+    2. Import messages with from user + createdDateTime
+    3. Complete migration (POST /beta/chats/{id}/completeMigration)
 
-    Requires delegated auth with Chat.ReadWrite permission.
+    If a chat already exists between the two users (from a prior run), it checks
+    for existing messages and skips if found. Chat messages cannot be updated or
+    deleted via Graph API.
+
+    Requires app-only auth with Chat.Create, Chat.ReadWrite.All, and
+    Teamwork.Migrate.All application permissions.
+
+    User AAD object IDs can be set in config.json (users.*.aadObjectId) to avoid
+    needing User.Read.All permission. If not set, falls back to Graph lookup.
 #>
 
 function Send-DemoChats {
@@ -21,9 +29,28 @@ function Send-DemoChats {
     )
 
     $users = $Config.users
+    $weekStart = if ($Config.demo.weekStart) { [datetime]::Parse($Config.demo.weekStart) } else { [datetime]::Now }
     $sent = 0
     $skipped = 0
     $failed = 0
+
+    # ── Build user ID cache from config (aadObjectId) or Graph lookup ────────
+    $userIdCache = @{}
+    foreach ($userKey in $users.Keys) {
+        $user = $users[$userKey]
+        if ($user.aadObjectId) {
+            $userIdCache[$userKey] = @{ id = $user.aadObjectId; displayName = $user.displayName }
+        } else {
+            try {
+                $u = Invoke-MgGraphRequest -Method GET `
+                    -Uri "https://graph.microsoft.com/v1.0/users/$($user.email)`?`$select=id,displayName"
+                $userIdCache[$userKey] = @{ id = $u.id; displayName = $u.displayName }
+            }
+            catch {
+                Write-Host "  [WARN] Could not resolve user $($user.email) : $($_.Exception.Message)" -ForegroundColor Yellow
+            }
+        }
+    }
 
     # Group messages by conversation (from+to pair)
     $conversations = @{}
@@ -38,72 +65,132 @@ function Send-DemoChats {
         $participants = $convKey -split '\+'
         $user1 = $users[$participants[0]].email
         $user2 = $users[$participants[1]].email
+        $fromName1 = $users[$participants[0]].displayName
+        $fromName2 = $users[$participants[1]].displayName
+
+        Write-Host "  [CHAT] $fromName1 <-> $fromName2" -ForegroundColor Cyan
 
         try {
-            # Create or get existing 1:1 chat
-            $chatBody = @{
-                chatType = "oneOnOne"
-                members  = @(
-                    @{
-                        "@odata.type"     = "#microsoft.graph.aadUserConversationMember"
-                        roles             = @("owner")
-                        "user@odata.bind" = "https://graph.microsoft.com/v1.0/users('$user1')"
-                    },
-                    @{
-                        "@odata.type"     = "#microsoft.graph.aadUserConversationMember"
-                        roles             = @("owner")
-                        "user@odata.bind" = "https://graph.microsoft.com/v1.0/users('$user2')"
-                    }
-                )
+            $migrationStart = $weekStart.AddDays(-7).ToString("yyyy-MM-ddTHH:mm:ssZ")
+            $memberList = @(
+                @{
+                    "@odata.type"     = "#microsoft.graph.aadUserConversationMember"
+                    roles             = @("owner")
+                    "user@odata.bind" = "https://graph.microsoft.com/v1.0/users('$user1')"
+                },
+                @{
+                    "@odata.type"     = "#microsoft.graph.aadUserConversationMember"
+                    roles             = @("owner")
+                    "user@odata.bind" = "https://graph.microsoft.com/v1.0/users('$user2')"
+                }
+            )
+
+            $chatId = $null
+            $inMigrationMode = $false
+
+            # ── Try creating chat in migration mode ──────────────────────────
+            try {
+                $migrationChatBody = @{
+                    chatType                               = "oneOnOne"
+                    createdDateTime                        = $migrationStart
+                    "@microsoft.graph.chatCreationMode"    = "migration"
+                    members                                = $memberList
+                }
+                $chatResult = Invoke-MgGraphRequest -Method POST `
+                    -Uri "https://graph.microsoft.com/v1.0/chats" -Body $migrationChatBody
+                $chatId = $chatResult["id"]
+                $inMigrationMode = $true
+            }
+            catch {
+                # Migration-mode creation failed (chat may already exist)
+                # Fall back to normal create-or-get
+                $normalChatBody = @{
+                    chatType = "oneOnOne"
+                    members  = $memberList
+                }
+                $chatResult = Invoke-MgGraphRequest -Method POST `
+                    -Uri "https://graph.microsoft.com/v1.0/chats" -Body $normalChatBody
+                $chatId = $chatResult["id"]
             }
 
-            $chatResult = Invoke-MgGraphRequest -Method POST `
-                -Uri "https://graph.microsoft.com/v1.0/chats" -Body $chatBody
-            $chatId = $chatResult["id"]
-
-            $fromName1 = $users[$participants[0]].displayName
-            $fromName2 = $users[$participants[1]].displayName
-            Write-Host "  [CHAT] $fromName1 <-> $fromName2" -ForegroundColor Cyan
-
-            # ── Check if messages already exist in this chat ─────────────────
-            $firstMsgText = ($msgs[0].message -replace '<[^>]+>','').Trim()
-            $firstMsgSnippet = $firstMsgText.Substring(0, [Math]::Min(40, $firstMsgText.Length))
-            try {
-                $chatMsgs = Invoke-MgGraphRequest -Method GET `
-                    -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages?`$top=20"
-                $existingTexts = $chatMsgs.value | ForEach-Object {
-                    ($_.body.content -replace '<[^>]+>','').Trim()
+            # ── If not in migration mode, check for existing messages ────────
+            if (-not $inMigrationMode) {
+                try {
+                    $chatMsgs = Invoke-MgGraphRequest -Method GET `
+                        -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages?`$top=5"
+                    $realMsgs = @($chatMsgs.value | Where-Object { $_.messageType -eq 'message' })
+                    if ($realMsgs.Count -gt 0) {
+                        Write-Host "    [SKIP] Messages already exist (chat messages cannot be updated)" -ForegroundColor DarkGray
+                        $skipped += $msgs.Count
+                        continue
+                    }
                 }
-                $alreadyExists = $existingTexts | Where-Object { $_ -like "*$firstMsgSnippet*" }
-                if ($alreadyExists) {
-                    Write-Host "    [SKIP] Messages already exist (chat messages cannot be updated)" -ForegroundColor DarkGray
-                    $skipped += $msgs.Count
+                catch {
+                    Write-Host "    [WARN] Could not check existing messages: $($_.Exception.Message)" -ForegroundColor Yellow
+                }
+
+                # Chat exists but has no user messages - try startMigration
+                try {
+                    $startBody = @{ conversationCreationDateTime = $migrationStart }
+                    Invoke-MgGraphRequest -Method POST `
+                        -Uri "https://graph.microsoft.com/beta/chats/$chatId/startMigration" `
+                        -Body $startBody | Out-Null
+                    $inMigrationMode = $true
+                }
+                catch {
+                    Write-Host "    [WARN] Cannot enter migration mode on existing chat." -ForegroundColor Yellow
+                    Write-Host "    Run Reset-DemoData.ps1 to clean up old chats first." -ForegroundColor DarkGray
+                    $failed += $msgs.Count
                     continue
                 }
             }
-            catch {
-                # If check fails, proceed with sending
-            }
 
-            # Send each message in order
+            # ── Import messages with correct from user ───────────────────────
+            $msgIndex = 0
+            $importedCount = 0
             foreach ($msg in $msgs) {
-                $senderAddr = $users[$msg.from].email
+                $senderKey = $msg.from
+                $senderInfo = $userIdCache[$senderKey]
+                if (-not $senderInfo) {
+                    Write-Host "    [WARN] Unknown sender '$senderKey' - skipping message" -ForegroundColor Yellow
+                    $failed++
+                    continue
+                }
+
+                # Each message needs a unique createdDateTime
+                $msgTime = $weekStart.AddDays(-1).AddHours(9).AddMinutes($msgIndex * 2).ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
 
                 $msgBody = @{
+                    createdDateTime = $msgTime
+                    from = @{
+                        user = @{
+                            id              = $senderInfo.id
+                            displayName     = $senderInfo.displayName
+                            userIdentityType = "aadUser"
+                        }
+                    }
                     body = @{
                         contentType = "html"
                         content     = $msg.message
                     }
                 }
 
-                # Use the delegated-on-behalf endpoint with app permissions
                 Invoke-MgGraphRequest -Method POST `
                     -Uri "https://graph.microsoft.com/v1.0/chats/$chatId/messages" `
-                    -Body $msgBody `
-                    -Headers @{ "Content-Type" = "application/json" } | Out-Null
+                    -Body $msgBody | Out-Null
 
-                Write-Host "    [OK] $($users[$msg.from].displayName): $($msg.message -replace '<[^>]+>','' | Select-Object -First 1)" -ForegroundColor Green
+                $preview = ($msg.message -replace '<[^>]+>','')
+                if ($preview.Length -gt 60) { $preview = $preview.Substring(0, 60) }
+                Write-Host "    [OK] $($senderInfo.displayName): $preview" -ForegroundColor Green
                 $sent++
+                $importedCount++
+                $msgIndex++
+            }
+
+            # ── Complete migration ───────────────────────────────────────────
+            if ($importedCount -gt 0) {
+                Invoke-MgGraphRequest -Method POST `
+                    -Uri "https://graph.microsoft.com/beta/chats/$chatId/completeMigration" | Out-Null
             }
         }
         catch {
@@ -114,6 +201,6 @@ function Send-DemoChats {
 
     Write-Host "[CHATS] $sent new, $skipped skipped (existing), $failed failed." -ForegroundColor $(if ($failed -eq 0) { 'Green' } else { 'Yellow' })
     if ($failed -gt 0) {
-        Write-Host "  TIP: Ensure delegated auth includes Chat.ReadWrite scope and the signed-in user is a chat participant." -ForegroundColor DarkGray
+        Write-Host "  TIP: Ensure app has Chat.Create, Chat.ReadWrite.All, and Teamwork.Migrate.All application permissions." -ForegroundColor DarkGray
     }
 }

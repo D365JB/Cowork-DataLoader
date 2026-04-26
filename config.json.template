@@ -10,11 +10,11 @@
     "_note": "Leave clientSecret empty to be prompted at runtime, or paste it here for unattended runs."
   },
   "users": {
-    "james":   { "email": "admin@yourtenant.onmicrosoft.com",    "displayName": "James Bowen",  "role": "VP of Operations" },
-    "spencer": { "email": "spencer@yourtenant.onmicrosoft.com",  "displayName": "Spencer Low",  "role": "VP of Sales" },
-    "molly":   { "email": "molly@yourtenant.onmicrosoft.com",    "displayName": "Molly Clark",  "role": "Product Manager" },
-    "renee":   { "email": "reneel@yourtenant.onmicrosoft.com",   "displayName": "Renee Lo",     "role": "Marketing Lead" },
-    "david":   { "email": "davids@yourtenant.onmicrosoft.com",   "displayName": "David So",     "role": "Chief of Staff" }
+    "james":   { "email": "admin@yourtenant.onmicrosoft.com",    "displayName": "James Bowen",  "role": "VP of Operations", "aadObjectId": "" },
+    "spencer": { "email": "spencer@yourtenant.onmicrosoft.com",  "displayName": "Spencer Low",  "role": "VP of Sales",       "aadObjectId": "" },
+    "molly":   { "email": "molly@yourtenant.onmicrosoft.com",    "displayName": "Molly Clark",  "role": "Product Manager",   "aadObjectId": "" },
+    "renee":   { "email": "reneel@yourtenant.onmicrosoft.com",   "displayName": "Renee Lo",     "role": "Marketing Lead",    "aadObjectId": "" },
+    "david":   { "email": "davids@yourtenant.onmicrosoft.com",   "displayName": "David So",     "role": "Chief of Staff",    "aadObjectId": "" }
   },
   "demo": {
     "company": "Apex Manufacturing",
